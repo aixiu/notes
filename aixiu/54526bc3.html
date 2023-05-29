@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="//fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="eZIAiI9UOOFS9gGrEGJMCgLmHsUScGGsZTkdsKq5YqY">
+  <meta name="msvalidate.01" content="583F0DD3225A3B6BBCCFDA9F66C1E404">
+  <meta name="baidu-site-verification" content="z9DiSS0RNh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.ynxiu.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":{"twikoo":{"text":"\u003ci class=\"fab fa-gratipay fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> twikoo  | 默认","order":1},"giscus":{"text":"\u003ci class=\"fab fa-github-alt fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> giscus(需github帐号) | 备用","order":2}},"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUpribbon"}},"prism":false,"i18n":{"placeholder":"请输入关键字搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前几天Oracle Cloud注册成功率又放水！又有一批网友上车了！这个马甲将甲骨文云VNC部分内容完善一下！ 什么情况下会用到 VNC ？比如服务器无法正常启动，SSH无法正常登陆到服务器，这个时候需要利用VNC上服务器上排查一下问题！ 常的场景：1）DD 系统服务器失联。 2）SSH密码忘记。 本文主要分为2部分。第一部分是利用Linux，第二部分是利用Windows 10。其中Linux相对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle Cloud利用VNC拯救失联服务器(Linux和Windows)">
+<meta property="og:url" content="http://blog.ynxiu.com/aixiu/54526bc3.html">
+<meta property="og:site_name" content="量子广告">
+<meta property="og:description" content="前几天Oracle Cloud注册成功率又放水！又有一批网友上车了！这个马甲将甲骨文云VNC部分内容完善一下！ 什么情况下会用到 VNC ？比如服务器无法正常启动，SSH无法正常登陆到服务器，这个时候需要利用VNC上服务器上排查一下问题！ 常的场景：1）DD 系统服务器失联。 2）SSH密码忘记。 本文主要分为2部分。第一部分是利用Linux，第二部分是利用Windows 10。其中Linux相对">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/98f4a0a25c73353.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/ec15f6eb172d967.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/fe935ab18e0e606.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/4dcfaa31db4b676.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/f2d2788ad0b8276.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/e2afc2851eb41c5.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/5cb93337cd117e9.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/8afaf5658d2af67.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/4670a54408b2aee.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/13b5900c2e74089.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/842cc269fbf6d15.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/40511250e3b4be3.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/9166a3692c77cab.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/3980f1cb817b1de.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/d1faaadaeed5fad.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/dbca253fbd141a9.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/a863f0ccd075a2d.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/eaf4f04e2faeba2.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/f694c9bfda2e151.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/54526bc3/9827d4ddcd0649e.png">
+<meta property="article:published_time" content="2023-03-23T08:56:08.000Z">
+<meta property="article:modified_time" content="2023-03-23T08:56:08.000Z">
+<meta property="article:author" content="Aixiu">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="甲骨文">
+<meta property="article:tag" content="VNC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.ynxiu.com/aixiu/54526bc3/98f4a0a25c73353.png">
+
+
+<link rel="canonical" href="http://blog.ynxiu.com/aixiu/54526bc3.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.ynxiu.com/aixiu/54526bc3.html","path":"aixiu/54526bc3.html","title":"Oracle Cloud利用VNC拯救失联服务器(Linux和Windows)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Oracle Cloud利用VNC拯救失联服务器(Linux和Windows) | 量子广告</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?e1515d81cb5b44b88bfce41938a6921a"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="量子广告" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">量子广告</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">协作发展&bull;畅想双赢</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>链接</a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-other"><a href="/other/" rel="section"><i class="fa fa-flask fa-fw"></i>其它</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="请输入关键字搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E7%89%88"><span class="nav-number">1.</span> <span class="nav-text">Linux版</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90SSH-KEY"><span class="nav-number">1.2.</span> <span class="nav-text">生成SSH KEY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-number">1.3.</span> <span class="nav-text">配置控制台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BASSH%E4%BB%A3%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">创建SSH代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VNC%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.5.</span> <span class="nav-text">VNC连接服务器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E7%89%88"><span class="nav-number">2.</span> <span class="nav-text">Windows版</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C-1"><span class="nav-number">2.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90SSH-KEY-1"><span class="nav-number">2.2.</span> <span class="nav-text">生成SSH KEY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E5%8F%B0-1"><span class="nav-number">2.3.</span> <span class="nav-text">配置控制台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH%E7%A7%81%E9%92%A5%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">SSH私钥转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VNC%E5%91%BD%E4%BB%A4%E9%87%8D%E6%9E%84"><span class="nav-number">2.5.</span> <span class="nav-text">VNC命令重构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8plink%E4%BB%A3%E7%90%86"><span class="nav-number">2.6.</span> <span class="nav-text">启动plink代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VNC%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8-1"><span class="nav-number">2.7.</span> <span class="nav-text">VNC连接服务器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">附录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">最后总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Aixiu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Aixiu</p>
+  <div class="site-description" itemprop="description">专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpeGl1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aixiu"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0L3UvYWl4aXU=" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;aixiu"><i class="fab fa-gg fa-fw"></i>Coding</span>
+      </span>
+  </div>
+<div id="chakhsu" class="site-description" itemprop="description">
+  <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } 
+  /*以下内容自定义修改*/ 
+  var l = "量子广告-", o = ["协作发展", "畅想双赢", "承接各类户内外广告","passion & love"].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); 
+  </script> 
+<div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/92575433.html" rel="bookmark">
+        <time class="popular-posts-time">2023-01-14</time>
+        <br>
+      甲骨文DD&失联救砖教程
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/759b51dc.html" rel="bookmark">
+        <time class="popular-posts-time">2023-03-23</time>
+        <br>
+      Oracle控制台更改密码、邮箱、租户名等教程
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/fdc6071f.html" rel="bookmark">
+        <time class="popular-posts-time">2023-03-23</time>
+        <br>
+      Oracle 甲骨文AMD/ARM实例救援教程
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.ynxiu.com/aixiu/54526bc3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Aixiu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="量子广告">
+      <meta itemprop="description" content="专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Oracle Cloud利用VNC拯救失联服务器(Linux和Windows) | 量子广告">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Oracle Cloud利用VNC拯救失联服务器(Linux和Windows)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-23 08:56:08" itemprop="dateCreated datePublished" datetime="2023-03-23T08:56:08+00:00">2023-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">技术探讨</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>前几天Oracle Cloud注册成功率又放水！又有一批网友上车了！这个马甲将甲骨文云VNC部分内容完善一下！</p>
+<p>什么情况下会用到 VNC ？比如服务器无法正常启动，SSH无法正常登陆到服务器，这个时候需要利用VNC上服务器上排查一下问题！</p>
+<p>常的场景：1）DD 系统服务器失联。 2）SSH密码忘记。</p>
+<p>本文主要分为2部分。第一部分是利用Linux，第二部分是利用Windows 10。其中Linux相对来说简单一些！</p>
+ <span id="more"></span>
+
+<h3 id="Linux版"><a href="#Linux版" class="headerlink" title="Linux版"></a>Linux版</h3><p>这部分操作使用的是利用CentOS 7 + VNCviewer绿色版！</p>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>1）VNC链接工具，【<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVhbHZuYy5jb20vZW4vY29ubmVjdC9kb3dubG9hZC92aWV3ZXIvd2luZG93cy8=">VNC Connect<i class="fa fa-external-link-alt"></i></span>】或者【<span class="exturl" data-url="ZnRwOi8vMTkyLjk5LjExLjIwNC9WTkN2aWV3ZXIlQzIlQ0MlQzklQUIlQjAlRTYuemlw">VNCviewer绿色版<i class="fa fa-external-link-alt"></i></span>（解压密码：RUYO.net）】。</p>
+<p>2）准备一台Linux服务器。</p>
+<h4 id="生成SSH-KEY"><a href="#生成SSH-KEY" class="headerlink" title="生成SSH KEY"></a>生成SSH KEY</h4><p>1）登陆Linux服务器输入命令！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//生成SSH KEY</span><br><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p>2）命令执行效果如下！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ssh-keygen </span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/root/.ssh/id_rsa): </span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /root/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /root/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:QfclO+AvXZ/O6vGNfzo4P2pftiHRoKG2fgc5p9bvu1o root@localhost.localdomain</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|        . o . .  |</span><br><span class="line">|       . o o +   |</span><br><span class="line">|        . ..+..  |</span><br><span class="line">|         ..oooo..|</span><br><span class="line">|        So..+. o.|</span><br><span class="line">|        . .= .+  |</span><br><span class="line">|         .  *+ Eo|</span><br><span class="line">|        .  ++oO+=|</span><br><span class="line">|         .o.+OO%*|</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+
+<p>3）获取SSH公钥：<code>cat ~/.ssh/id_rsa.pub</code> （公钥后面会用到）</p>
+<p>SSH私钥位置： <code>~/.ssh/id_rsa</code></p>
+<h4 id="配置控制台"><a href="#配置控制台" class="headerlink" title="配置控制台"></a>配置控制台</h4><p>1）登陆Oracle Cloud控制台，打开实例详细信息 – 控制台连接 – 点击【创建控制台链接】</p>
+<p><img src="/aixiu/54526bc3/98f4a0a25c73353.png" alt="img"></p>
+<p>2）将 SSH公钥 复制到SSH密钥输入框内，保存！</p>
+<p><img src="/aixiu/54526bc3/ec15f6eb172d967.png" alt="img"></p>
+<p>3）等到链接的状态变成【活动】，点击【⋮】 – 【复制Linux&#x2F;Mac的VNC连接】</p>
+<p><img src="/aixiu/54526bc3/fe935ab18e0e606.png" alt="img"></p>
+<h4 id="创建SSH代理"><a href="#创建SSH代理" class="headerlink" title="创建SSH代理"></a>创建SSH代理</h4><p>1）需要在Linux服务器上将端口开放，默认使用的端口是5900，<strong>建议不要使用这个端口</strong>，我已经将端口换成 8000！</p>
+<p>将上面复制的内容中的 5900 换成 8000 （如果8000被占用，就换其他的）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -o ProxyCommand=&#x27;ssh -W %h:%p -p 443 ocid1.instanceconsoleconnection.oc1.ap-seoul-1.anuwgljr2ano4pqcwnhqj5tw4wgrxxxo6ba@instance-console.ap-seoul-1.oraclecloud.com&#x27; -N -L localhost:**5900**:ocid1.instance.oc1.ap-seoul-1.anuwgljr2ano4pqcpkcs63uecyrs5bqmhsblzgtkygtjvhb666kytctumtoa:5900 ocid1.instance.oc1.ap-seoul-1.anuwgljr2ano4pqcpkcs63uecyrs5xxxkytctumtoa</span><br></pre></td></tr></table></figure>
+
+<p>2）将命令粘贴到Linux服务器命令行执行。</p>
+<p>注意：第一次执行命令有2个位置，需要输入 yes 回车！</p>
+<p><img src="/aixiu/54526bc3/4dcfaa31db4b676.png" alt="img"></p>
+<h4 id="VNC连接服务器"><a href="#VNC连接服务器" class="headerlink" title="VNC连接服务器"></a>VNC连接服务器</h4><p>使用VNC 客户端链接即可！然后就成功了！！</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务器<span class="built_in">IP</span>:<span class="number">8000</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/54526bc3/f2d2788ad0b8276.png" alt="img"></p>
+<p><img src="/aixiu/54526bc3/e2afc2851eb41c5.png" alt="img"></p>
+<h3 id="Windows版"><a href="#Windows版" class="headerlink" title="Windows版"></a>Windows版</h3><p>这部分操作使用的是 Windows 10 + VNCviewer绿色版</p>
+<h4 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h4><p>1）VNC链接工具，【<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVhbHZuYy5jb20vZW4vY29ubmVjdC9kb3dubG9hZC92aWV3ZXIvd2luZG93cy8=">VNC Connect<i class="fa fa-external-link-alt"></i></span>】或者【<span class="exturl" data-url="ZnRwOi8vMTkyLjk5LjExLjIwNC9WTkN2aWV3ZXIlQzIlQ0MlQzklQUIlQjAlRTYuemlw">VNCviewer绿色版<i class="fa fa-external-link-alt"></i></span>（解压密码：RUYO.net）】。</p>
+<p>2）Windows 10 需要安装 Git 和 PuTTY（下载地址参考附录部分）</p>
+<p><strong>提醒：</strong>PuTTY须安装到 C:\Program Files\</p>
+<h4 id="生成SSH-KEY-1"><a href="#生成SSH-KEY-1" class="headerlink" title="生成SSH KEY"></a>生成SSH KEY</h4><p><strong>这里严重不建议使用 PuTTY 生成 SSH KEY！</strong></p>
+<p>1）利用Git Bash生成！</p>
+<p>打开菜单 – Git – Git Bash</p>
+<p><img src="/aixiu/54526bc3/5cb93337cd117e9.png" alt="img"></p>
+<p>2）执行命令生成SSH 密钥！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//生成SSH KEY </span><br><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/54526bc3/8afaf5658d2af67.png" alt="img"></p>
+<p>3）密钥默认存放位置：<code>C:\Users\ruyo\.ssh\</code> 目录。（其中ruyo为当前操作系统登陆用户的用户名）</p>
+<p><img src="/aixiu/54526bc3/4670a54408b2aee.png" alt="img"></p>
+<p>SSH公钥：<code>id_rsa.pub</code></p>
+<p>SSH私钥： &#96;id_rsa&#96;&#96;&#96;</p>
+<h4 id="配置控制台-1"><a href="#配置控制台-1" class="headerlink" title="配置控制台"></a>配置控制台</h4><p>这里和Linux版的操作基本一样，将SSH公钥复制进去！</p>
+<p>等到链接的状态变成【活动】，点击【⋮】 – 【复制Windows的VNC连接】</p>
+<p><img src="/aixiu/54526bc3/13b5900c2e74089.png" alt="img"></p>
+<h4 id="SSH私钥转换"><a href="#SSH私钥转换" class="headerlink" title="SSH私钥转换"></a>SSH私钥转换</h4><p>由于Oracle Cloud VNC 识别不了上面的SSH私钥，需要利用下面的工具转一下！</p>
+<p>1）打开菜单 – PuTTY – PuTTYgen</p>
+<p><img src="/aixiu/54526bc3/842cc269fbf6d15.png" alt="img"></p>
+<p>2）打开的界面点击【Load】，选择上面生成的SSH私钥。</p>
+<p>如图操作，选择<code>id_rsa</code> ，出现提示框点击确定即可！</p>
+<p><img src="/aixiu/54526bc3/40511250e3b4be3.png" alt="img"></p>
+<p><img src="/aixiu/54526bc3/9166a3692c77cab.png" alt="img"></p>
+<p>3）点击【Save private key】，将转换后的私钥保存到文件目录（<strong>记住该文件目录后面要用到！</strong>）。</p>
+<p>PS：尽量要保存到 .ssh 目录中，命名要ruyo.ppk (后面有一键生成命令必须这样！)</p>
+<p><img src="/aixiu/54526bc3/3980f1cb817b1de.png" alt="img"></p>
+<p><img src="/aixiu/54526bc3/d1faaadaeed5fad.png" alt="img"></p>
+<h4 id="VNC命令重构"><a href="#VNC命令重构" class="headerlink" title="VNC命令重构"></a>VNC命令重构</h4><p>直接复制处理的命令，执行上有一些问题。这里需要将命令修改一下！主要是替换以下内容：</p>
+<p>1）替换 plink.exe 文件目录</p>
+<p>2）替换PPK文件目录</p>
+<p>3）将1条命令 转成 2条命令来执行</p>
+<p><strong>原始命令：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Start-Job &#123; Echo N | plink.exe -i $env:homedrive$env:homepath\oci\console.ppk -N -ssh -P 443 -l ocid1.instanceconsoleconnection.oc1.ap-seoul-1.anuwgljr2ano4pqcwnhqj5tw4wgrpmkuib4yah2naclpvcemkr27ajq5o6ba -L 5905:ocid1.instance.oc1.ap-seoul-1.anuwgljr2ano4pqcpkcs63uecyrs5bqmhsblzgtkygtjvhb666kytctumtoa:5905 instance-console.ap-seoul-1.oraclecloud.com &#125;; sleep 5; plink.exe -i $env:homedrive$env:homepath\oci\console.ppk -N -L 5900:localhost:5900 -P 5905 localhost -l ocid1.instance.oc1.ap-seoul-1.anuwgljr2ano4pqcpkcs63uecyrs5bqmhsblzgtkygtjvhb666kytctumtoa</span><br></pre></td></tr></table></figure>
+
+<p><strong>转换后命令：</strong></p>
+<p><strong>第一条命令：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x27;C:\Program Files\PuTTY\&#x27;.\plink.exe -i $env:homedrive$env:homepath\.ssh\ruyo.ppk -N -ssh -P 443 -l ocid1.instanceconsoleconnection.oc1.ap-seoul-1.anuwgljr2ano4pqcwnhqj5tw4wgrpmkuib4yah2naclpvcemkr27ajq5o6ba -L 5905:ocid1.instance.oc1.ap-seoul-1.anuwgljr2ano4pqcpkcs63uecyrs5bqmhsblzgtkygtjvhb666kytctumtoa:5905 instance-console.ap-seoul-1.oraclecloud.com</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二条命令：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x27;C:\Program Files\PuTTY\&#x27;.\plink.exe -i $env:homedrive$env:homepath\.ssh\ruyo.ppk -N -L 5900:localhost:5900 -P 5905 localhost -l ocid1.instance.oc1.ap-seoul-1.anuwgljr2ano4pqcpkcs63uecyrs5bqmhsblzgtkygtjvhb666kytctumtoa</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动plink代理"><a href="#启动plink代理" class="headerlink" title="启动plink代理"></a>启动plink代理</h4><p>1）我们需要启动2个 PowerShell （Win + X 或者 开始菜单鼠标右键）</p>
+<p><img src="/aixiu/54526bc3/dbca253fbd141a9.png" alt="img"></p>
+<p>2）在2个 PowerShell 分别执行 2条VNC命令。</p>
+<p><strong>提醒：命令执行后，显示 Access granted. Press Return to begin session. 需要再按一次回车！！</strong></p>
+<p><img src="/aixiu/54526bc3/a863f0ccd075a2d.png" alt="img"></p>
+<p><img src="/aixiu/54526bc3/eaf4f04e2faeba2.png" alt="img"></p>
+<h4 id="VNC连接服务器-1"><a href="#VNC连接服务器-1" class="headerlink" title="VNC连接服务器"></a>VNC连接服务器</h4><p>使用VNC 客户端链接即可！然后就成功了！！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localhost:5900</span><br></pre></td></tr></table></figure>
+
+<p>这里我们使用默认端口基本上没啥太大问题！</p>
+<p><img src="/aixiu/54526bc3/f694c9bfda2e151.png" alt="img"></p>
+<p><img src="/aixiu/54526bc3/9827d4ddcd0649e.png" alt="img"></p>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>Git下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb3dubG9hZHM=">https://git-scm.com/downloads<i class="fa fa-external-link-alt"></i></span></p>
+<p>PuTTY下载地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hpYXJrLmdyZWVuZW5kLm9yZy51ay9+c2d0YXRoYW0vcHV0dHkvbGF0ZXN0Lmh0bWw=">https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h3><p>本文有几个疑惑不知道原因，知道的大佬可以留言指导一下！</p>
+<p>1）为什么<strong>PuTTY 生成的 SHH 密钥 无法识别？（怀疑是密钥类型或者长度）</strong></p>
+<p>2）直接复制VNC原始命令不能执行？（原命令有一些错误不显示，命令有2步确认的操作？）</p>
+<p>以上博主没有做深入的摸索！</p>
+<p>本文引用自：<span class="exturl" data-url="aHR0cHM6Ly9jbmJveS5vcmcvNzU3">四海部落<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    Buy Me Coffee
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Aixiu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Aixiu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>aixiu
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.ynxiu.com/aixiu/54526bc3.html" title="Oracle Cloud利用VNC拯救失联服务器(Linux和Windows)">http://blog.ynxiu.com/aixiu/54526bc3.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Oracle/" rel="tag"><i class="fa fa-tag"></i> Oracle</a>
+              <a href="/tags/%E7%94%B2%E9%AA%A8%E6%96%87/" rel="tag"><i class="fa fa-tag"></i> 甲骨文</a>
+              <a href="/tags/VNC/" rel="tag"><i class="fa fa-tag"></i> VNC</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/aixiu/fdc6071f.html" rel="prev" title="Oracle 甲骨文AMD/ARM实例救援教程">
+                  <i class="fa fa-chevron-left"></i> Oracle 甲骨文AMD/ARM实例救援教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/aixiu/dc86c258.html" rel="next" title="甲骨文 DD 安装成Windows系统 保姆级教程 百分百成功！">
+                  甲骨文 DD 安装成Windows系统 保姆级教程 百分百成功！ <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">鄂ICP备15017263号 </span>
+  </div>
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YnXiu.com <span class="post-meta-item">|</span> <a target="_blank" rel="noopener" href="http://ynxiu.com">LZ-AD</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">46k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:34</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.ynxiu.com/aixiu/54526bc3.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.aixiu.ml","jsUrl":null,"el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<!-- 动感标签 -->
+<script type="text/javascript" src="/js/dongganTab.js"></script>
+</body>
+</html>

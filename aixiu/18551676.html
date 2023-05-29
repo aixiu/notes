@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="//fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="eZIAiI9UOOFS9gGrEGJMCgLmHsUScGGsZTkdsKq5YqY">
+  <meta name="msvalidate.01" content="583F0DD3225A3B6BBCCFDA9F66C1E404">
+  <meta name="baidu-site-verification" content="z9DiSS0RNh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.ynxiu.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":{"twikoo":{"text":"\u003ci class=\"fab fa-gratipay fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> twikoo  | 默认","order":1},"giscus":{"text":"\u003ci class=\"fab fa-github-alt fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> giscus(需github帐号) | 备用","order":2}},"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUpribbon"}},"prism":false,"i18n":{"placeholder":"请输入关键字搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="博客Next主题升级失败，处理过程，以后可按此过程。 记录一次hexo博客Next主题，升级失败，重新安装的过程。注：博客目录为”My_blog”   如果需要升级 node.js 先去 https:&#x2F;&#x2F;nodejs.org&#x2F;zh-cn&#x2F; 下载最新版安装，安装过程自行百度。 备份之前博客文件夹下所有内容（注意如果用git管理过，会有隐藏文件夹 .git ） 然后确保文件夹内无其它任何文件，在根目录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Update-hexo-by7.2.2">
+<meta property="og:url" content="http://blog.ynxiu.com/aixiu/18551676.html">
+<meta property="og:site_name" content="量子广告">
+<meta property="og:description" content="博客Next主题升级失败，处理过程，以后可按此过程。 记录一次hexo博客Next主题，升级失败，重新安装的过程。注：博客目录为”My_blog”   如果需要升级 node.js 先去 https:&#x2F;&#x2F;nodejs.org&#x2F;zh-cn&#x2F; 下载最新版安装，安装过程自行百度。 备份之前博客文件夹下所有内容（注意如果用git管理过，会有隐藏文件夹 .git ） 然后确保文件夹内无其它任何文件，在根目录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-20T17:54:51.000Z">
+<meta property="article:modified_time" content="2020-03-20T17:54:51.000Z">
+<meta property="article:author" content="Aixiu">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="插件">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.ynxiu.com/aixiu/18551676.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.ynxiu.com/aixiu/18551676.html","path":"aixiu/18551676.html","title":"Update-hexo-by7.2.2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Update-hexo-by7.2.2 | 量子广告</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?e1515d81cb5b44b88bfce41938a6921a"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="量子广告" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">量子广告</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">协作发展&bull;畅想双赢</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>链接</a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-other"><a href="/other/" rel="section"><i class="fa fa-flask fa-fw"></i>其它</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="请输入关键字搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2Next%E4%B8%BB%E9%A2%98%E5%8D%87%E7%BA%A7%E5%A4%B1%E8%B4%A5%EF%BC%8C%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B%EF%BC%8C%E4%BB%A5%E5%90%8E%E5%8F%AF%E6%8C%89%E6%AD%A4%E8%BF%87%E7%A8%8B%E3%80%82"><span class="nav-number">1.</span> <span class="nav-text">博客Next主题升级失败，处理过程，以后可按此过程。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">安装的插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%9B%B8%E5%85%B3%E8%B4%B4%E5%AD%90"><span class="nav-number">2.1.</span> <span class="nav-text">1、相关贴子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E8%8B%B1%E6%96%87%E8%87%AA%E5%8A%A8%E7%A9%BA%E6%A0%BC"><span class="nav-number">2.2.</span> <span class="nav-text">2、英文自动空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%8A%A0%E5%BF%AB%E9%A1%B5%E9%9D%A2%E9%80%9F%E5%BA%A6"><span class="nav-number">2.3.</span> <span class="nav-text">3、加快页面速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E9%98%85%E8%AF%BB%E6%AC%A1%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">4、阅读次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81leancloud%E8%AE%BF%E5%AE%A2%E8%AE%A1%E6%95%B0%E5%99%A8%E4%B8%AD%E7%9A%84%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E9%94%99%E8%AF%AF-%E9%80%89%E6%8B%A9%E6%80%A7%E5%AE%89%E8%A3%85"><span class="nav-number">2.5.</span> <span class="nav-text">5、leancloud访客计数器中的严重安全错误  (选择性安装)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E6%8F%92%E4%BB%B6"><span class="nav-number">2.6.</span> <span class="nav-text">6、本地搜索插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E6%9C%9F%E9%97%B4%E9%A1%B6%E9%83%A8%E7%9A%84%E8%BF%9B%E5%BA%A6%E6%9D%A1"><span class="nav-number">2.7.</span> <span class="nav-text">7、页面加载期间顶部的进度条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81NexT%E7%9A%84%E6%A0%87%E7%AD%BE%E6%8F%92%E4%BB%B6"><span class="nav-number">2.8.</span> <span class="nav-text">8、NexT的标签插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81PDF%E6%8F%92%E4%BB%B6-%EF%BC%88%E5%8F%AF%E9%80%89%E5%AE%89%E8%A3%85%EF%BC%89"><span class="nav-number">2.9.</span> <span class="nav-text">9、PDF插件 （可选安装）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81%E5%8A%A8%E6%80%81-Title-%E6%A0%87%E9%A2%98"><span class="nav-number">2.10.</span> <span class="nav-text">10、动态 Title 标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6"><span class="nav-number">2.11.</span> <span class="nav-text">11、评论插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81%E6%96%87%E7%AB%A0%E7%9F%AD%E9%93%BE%E6%8E%A5"><span class="nav-number">2.12.</span> <span class="nav-text">12、文章短链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">3.</span> <span class="nav-text">其它</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Aixiu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Aixiu</p>
+  <div class="site-description" itemprop="description">专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpeGl1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aixiu"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0L3UvYWl4aXU=" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;aixiu"><i class="fab fa-gg fa-fw"></i>Coding</span>
+      </span>
+  </div>
+<div id="chakhsu" class="site-description" itemprop="description">
+  <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } 
+  /*以下内容自定义修改*/ 
+  var l = "量子广告-", o = ["协作发展", "畅想双赢", "承接各类户内外广告","passion & love"].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); 
+  </script> 
+<div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/2057e4c3.html" rel="bookmark">
+        <time class="popular-posts-time">2016-05-19</time>
+        <br>
+      NexT主题'留言'页面增加最近访客
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/5830a8a7.html" rel="bookmark">
+        <time class="popular-posts-time">2019-06-05</time>
+        <br>
+      Cannot set property 'lastIndex' of undefined
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/b8b2d453.html" rel="bookmark">
+        <time class="popular-posts-time">2020-05-21</time>
+        <br>
+      git clone常用命令
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/9ea005af.html" rel="bookmark">
+        <time class="popular-posts-time">2020-03-20</time>
+        <br>
+      npm-outdated-explain
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/2af6010.html" rel="bookmark">
+        <time class="popular-posts-time">2017-03-03</time>
+        <br>
+      hexo-nexo主题配置中的问题
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.ynxiu.com/aixiu/18551676.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Aixiu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="量子广告">
+      <meta itemprop="description" content="专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Update-hexo-by7.2.2 | 量子广告">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Update-hexo-by7.2.2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-03-20 17:54:51" itemprop="dateCreated datePublished" datetime="2020-03-20T17:54:51+00:00">2020-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="博客Next主题升级失败，处理过程，以后可按此过程。"><a href="#博客Next主题升级失败，处理过程，以后可按此过程。" class="headerlink" title="博客Next主题升级失败，处理过程，以后可按此过程。"></a>博客Next主题升级失败，处理过程，以后可按此过程。</h2><blockquote>
+<p>记录一次hexo博客Next主题，升级失败，重新安装的过程。<br>注：博客目录为”My_blog”</p>
+</blockquote>
+<ul>
+<li>如果需要升级 node.js 先去 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL3poLWNuLw==">https://nodejs.org/zh-cn/<i class="fa fa-external-link-alt"></i></span> 下载最新版安装，安装过程自行百度。</li>
+<li>备份之前博客文件夹下所有内容（注意如果用git管理过，会有隐藏文件夹 .git ）</li>
+<li>然后确保文件夹内无其它任何文件，在根目录执行 hexo init ,出现 INFO  Start blogging with Hexo! ，为安装完毕，执行 npm install 安装其它依赖包。</li>
+<li>执行 hexo -v 查看版本是否正常。</li>
+<li>如果使用自动备份功能，则需安装插件 npm install –save shelljs ，并配合 scripts 目录下的 auto_push.js 使用，使用方法下这介绍。</li>
+<li>安装全新 Next 主题，执行 git clone <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span> themes&#x2F;next-7.x  ，主题目录在 E:\My_blog\themes\next-7.x</li>
+<li>执行  hexo g 和 hexo s 查看结果。</li>
+</ul>
+<blockquote>
+<p>其它主题配置请参照备份文件</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ub3Rlcy5kb3VibGVtaW5lLm1lLzIwMTUtMDctMDYtJUU4JTg3JUFBJUU1JThBJUE4JUU1JUE0JTg3JUU0JUJCJUJESGV4byVFNSU4RCU5QSVFNSVBRSVBMiVFNiVCQSU5MCVFNiU5NiU4NyVFNCVCQiVCNi5odG1s">自动备份<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ub3Rlcy5kb3VibGVtaW5lLm1lLzIwMTUtMDYtMjktSGV4byVFNiVCNyVCQiVFNSU4QSVBMCVFNiU5NiU4NyVFNyVBQiVBMCVFNiU5NyVCNiVFOCU4NyVBQSVFNSU4QSVBOCVFNiU4OSU5MyVFNSVCQyU4MCVFNyVCQyU5NiVFOCVCRSU5MSVFNSU5OSVBOC5odG1s">自动打开编辑器<i class="fa fa-external-link-alt"></i></span></p>
+<p><strong>npm outdated</strong> 查看所有包的版本</p>
+<blockquote>
+<p>如果没有老版本的，就没有任何输出<br>如果有新版本的，会提示你需要更新到的版本</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="安装的插件"><a href="#安装的插件" class="headerlink" title="安装的插件"></a>安装的插件</h2><h3 id="1、相关贴子"><a href="#1、相关贴子" class="headerlink" title="1、相关贴子"></a>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RlYTMvaGV4by1yZWxhdGVkLXBvcHVsYXItcG9zdHM=">相关贴子<i class="fa fa-external-link-alt"></i></span></h3><p>生成相关帖子和热门帖子的链接列表。另外，此插件可以获取帖子的访问者计数（PV）。</p>
+<blockquote>
+<p>安装方法：博客根目录执行</p>
+</blockquote>
+ <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-related-popular-posts <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+<h3 id="2、英文自动空格"><a href="#2、英文自动空格" class="headerlink" title="2、英文自动空格"></a>2、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZpbnRhL3Bhbmd1Lmpz">英文自动空格<i class="fa fa-external-link-alt"></i></span></h3><p>英文单词前后自动加空格</p>
+<p>安装方法：博客根目录执行</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>npm install pangu --save</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="variable">$ </span>yarn add pangu</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、加快页面速度"><a href="#3、加快页面速度" class="headerlink" title="3、加快页面速度"></a>3、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0dvb2dsZUNocm9tZUxhYnMvcXVpY2tsaW5r">加快页面速度<i class="fa fa-external-link-alt"></i></span></h3><p>通过在空闲时间预取视口内链接来加快后续页面加载速度</p>
+<p>安装方法：博客根目录执行</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install <span class="comment">--save quicklink</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4、阅读次数"><a href="#4、阅读次数" class="headerlink" title="4、阅读次数"></a>4、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by1zeW1ib2xzLWNvdW50LXRpbWU=">阅读次数<i class="fa fa-external-link-alt"></i></span></h3><p>符号计数和阅读Hexo文章的时间。</p>
+<p>安装方法：博客根目录执行</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-symbols-<span class="built_in">count</span>-<span class="built_in">time</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Hexo<code>_config.yml</code>（位于博客的根目录中）中设置选项。</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加文章标题下字数统计、阅读时间，底部总阅读时间和代码量</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">symbols:</span> <span class="literal">false</span>  <span class="comment">#  文字统计</span></span><br><span class="line">  <span class="attr">time:</span> <span class="literal">false</span>  <span class="comment"># 阅读时长</span></span><br><span class="line">  <span class="attr">total_symbols:</span> <span class="literal">true</span>  <span class="comment"># 底部文字统计</span></span><br><span class="line">  <span class="attr">total_time:</span> <span class="literal">true</span>  <span class="comment"># 底部阅读时长</span></span><br></pre></td></tr></table></figure>
+<p><strong>主题<code>_config.yml</code>中设置选项。</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">separated_meta:</span> <span class="literal">true</span> <span class="comment"># 文章标题下</span></span><br><span class="line">  <span class="attr">item_text_post:</span> <span class="literal">true</span> <span class="comment"># 底部文字统计</span></span><br><span class="line">  <span class="attr">item_text_total:</span> <span class="literal">false</span> <span class="comment"># 底部阅读时长</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5、leancloud访客计数器中的严重安全错误-选择性安装"><a href="#5、leancloud访客计数器中的严重安全错误-选择性安装" class="headerlink" title="5、leancloud访客计数器中的严重安全错误  (选择性安装)"></a>5、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by1sZWFuY2xvdWQtY291bnRlci1zZWN1cml0eQ==">leancloud访客计数器中的严重安全错误<i class="fa fa-external-link-alt"></i></span>  (选择性安装)</h3><p>一个插件，用于修复NexT主题站点和其他使用类似方式集成了此功能的站点的leancloud访客计数器中的严重安全错误。记录如何设置计数器并以<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L2Jsb2IvbWFzdGVyL2RvY3MvTEVBTkNMT1VELUNPVU5URVItU0VDVVJJVFkubWQ=">英语<i class="fa fa-external-link-alt"></i></span>或<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0L2Jsb2IvbWFzdGVyL2RvY3MvemgtQ04vTEVBTkNMT1VELUNPVU5URVItU0VDVVJJVFkubWQ=">中文<i class="fa fa-external-link-alt"></i></span>安全运行。</p>
+<p>安装方法：博客根目录执行</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-leancloud-counter-security</span><br></pre></td></tr></table></figure>
+
+<p><strong>Hexo<code>_config.yml</code>（位于博客的根目录中）中设置选项。</strong></p>
+<p>如果<code>leancloud_counter_security</code>未指定（或注释），则插件将被完全禁用。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_counter_security:</span></span><br><span class="line">  <span class="attr">enable_sync:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">app_id:</span> <span class="string">&lt;your</span> <span class="string">app</span> <span class="string">id&gt;</span></span><br><span class="line">  <span class="attr">app_key:</span> <span class="string">&lt;your</span> <span class="string">app</span> <span class="string">key&gt;</span></span><br><span class="line">  <span class="attr">server_url:</span> <span class="string">&lt;your</span> <span class="string">server</span> <span class="string">url&gt;</span> <span class="comment"># Required for apps from CN region, e.g. https://leancloud.cn</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">&lt;your</span> <span class="string">username&gt;</span> <span class="comment"># Will be asked while deploying if is left blank</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">&lt;your</span> <span class="string">password&gt;</span> <span class="comment"># Recommmended to be left blank. Will be asked while deploying if is left blank</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>主题<code>_config.yml</code>中设置选项。</strong></p>
+<p>此插件集成在《 NexT》中，并且在主Hexo配置中启用该插件后，需要启用NexT配置中的选项：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_visitors:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">app_id:</span> <span class="string">&lt;your</span> <span class="string">app</span> <span class="string">id&gt;</span></span><br><span class="line">  <span class="attr">app_key:</span> <span class="string">&lt;your</span> <span class="string">app</span> <span class="string">key&gt;</span></span><br><span class="line">  <span class="comment"># Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line">  <span class="attr">security:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6、本地搜索插件"><a href="#6、本地搜索插件" class="headerlink" title="6、本地搜索插件"></a>6、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by1nZW5lcmF0b3Itc2VhcmNoZGI=">本地搜索插件<i class="fa fa-external-link-alt"></i></span></h3><p>搜索Hexo的数据生成器插件。</p>
+<p>安装方法：博客根目录执行</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-generator-searchdb</span><br></pre></td></tr></table></figure>
+
+<p><strong>Hexo<code>_config.yml</code>（位于博客的根目录中）中设置选项。</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">content:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>主题<code>_config.yml</code>中设置选项。</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If auto, trigger search by changing input.</span></span><br><span class="line">  <span class="comment"># If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="comment"># Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br><span class="line">  <span class="comment"># Unescape html strings to the readable one.</span></span><br><span class="line">  <span class="attr">unescape:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Preload the search data when the page loads.</span></span><br><span class="line">  <span class="attr">preload:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7、页面加载期间顶部的进度条"><a href="#7、页面加载期间顶部的进度条" class="headerlink" title="7、页面加载期间顶部的进度条"></a>7、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvdGhlbWUtbmV4dC1wYWNl">页面加载期间顶部的进度条<i class="fa fa-external-link-alt"></i></span></h3><p>安装方法：博客 <strong>主题</strong> 根目录执行</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/theme-next/</span>theme-<span class="keyword">next</span>-pace source<span class="regexp">/lib/</span>pace</span><br></pre></td></tr></table></figure>
+
+<p><strong>Hexo<code>_config.yml</code>（位于博客的根目录中）中设置选项。</strong></p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pace:</span><br><span class="line">  enable: true</span><br><span class="line">  # Themes list:</span><br><span class="line">  # big-counter | <span class="type">bounce</span> | <span class="type">barber</span>-shop | <span class="type">center</span>-atom | <span class="type">center</span>-circle | <span class="type">center</span>-radar | <span class="type">center</span>-<span class="built_in">simple</span></span><br><span class="line">  # corner-indicator | <span class="type">fill</span>-<span class="built_in">left</span> | <span class="type">flat</span>-<span class="built_in">top</span> | <span class="type">flash</span> | <span class="type">loading</span>-bar | <span class="type">mac</span>-osx | <span class="type">material</span> | <span class="type">minimal</span></span><br><span class="line">  theme: minimal</span><br></pre></td></tr></table></figure>
+
+<h3 id="8、NexT的标签插件"><a href="#8、NexT的标签插件" class="headerlink" title="8、NexT的标签插件"></a>8、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by1uZXh0LXRhZw==">NexT的标签插件<i class="fa fa-external-link-alt"></i></span></h3><p>安装方法：博客根目录执行</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install theme-<span class="keyword">next</span>/hexo-<span class="keyword">next</span>-<span class="keyword">tag</span></span><br></pre></td></tr></table></figure>
+
+<p>使用方法：</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Example</span><br><span class="line">Let&#x27;s <span class="keyword">create</span> <span class="keyword">include</span>-<span class="keyword">raw</span>.html file <span class="keyword">in</span> _data directory <span class="keyword">under</span> site root directory <span class="keyword">with</span> following content:</span><br><span class="line"></span><br><span class="line"><span class="keyword">Any</span> &lt;strong&gt; <span class="keyword">raw</span> content&lt;/strong&gt; may be included <span class="keyword">with</span> this tag.</span><br><span class="line"><span class="keyword">Then</span> <span class="keyword">in</span> <span class="keyword">any</span> post we can <span class="keyword">use</span> this content <span class="keyword">with</span> include_raw tag:</span><br><span class="line"></span><br><span class="line">&#123;% include_raw <span class="string">&#x27;_data/path/to/include-raw.html&#x27;</span> %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9、PDF插件-（可选安装）"><a href="#9、PDF插件-（可选安装）" class="headerlink" title="9、PDF插件 （可选安装）"></a>9、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvdGhlbWUtbmV4dC1wZGY=">PDF插件<i class="fa fa-external-link-alt"></i></span> （可选安装）</h3><p>这个插件可以预览博客页面中的PDF文件。如果浏览器本身支持嵌入式PDF，则NexT将创建一个标签并将PDF文件包含在您的网站上。否则，它将创建一个标签，并使用@mozilla的PDF.js呈现pdf文件。</p>
+<p>安装方法：博客 <strong>主题</strong> 根目录执行</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/theme-next/</span>theme-<span class="keyword">next</span>-pdf source<span class="regexp">/lib/</span>pdf</span><br></pre></td></tr></table></figure>
+
+<p><strong>主题<code>_config.yml</code>中设置选项。</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PDF tag</span></span><br><span class="line"><span class="comment"># NexT will try to load pdf files natively, if failed, pdf.js will be used.</span></span><br><span class="line"><span class="comment"># So, you have to install the dependency of pdf.js if you want to use pdf tag and make it available to all browsers.</span></span><br><span class="line"><span class="comment"># See: https://github.com/theme-next/theme-next-pdf</span></span><br><span class="line"><span class="attr">pdf:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Default height</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">500px</span></span><br></pre></td></tr></table></figure>
+
+<p>用法：</p>
+<p>为了在文章中嵌入PDF文件，您只需要使用本地PDF文件的URL创建一个“ pdf”标签，例如</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% pdf <span class="regexp">/path/</span>to<span class="regexp">/your/</span><span class="keyword">file</span>.pdf %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：请勿使用跨域PDF文件，因为它可能被CORS策略阻止。</p>
+<h3 id="10、动态-Title-标题"><a href="#10、动态-Title-标题" class="headerlink" title="10、动态 Title 标题"></a>10、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by1uZXh0LXRpdGxl">动态 Title 标题<i class="fa fa-external-link-alt"></i></span></h3><p>安装方法：博客根目录执行</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install theme-<span class="keyword">next</span>/hexo-<span class="keyword">next</span>-<span class="keyword">title</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Hexo<code>_config.yml</code>（位于博客的根目录中）中设置选项。或者</strong></p>
+<p><strong>主题<code>_config.yml</code>中设置选项。</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 动态 Title 标题</span></span><br><span class="line"><span class="comment"># Change title and favicon when window is hidden and visible.</span></span><br><span class="line"><span class="attr">title_change:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Enabling this feature on non-desktop devices may not be a good choice, but it depends on you.</span></span><br><span class="line">  <span class="attr">onmobile:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Enable random title or not.</span></span><br><span class="line">  <span class="comment"># Basically `random: true` means you have several titles to display and `random: false` means you have only one title to display.</span></span><br><span class="line">  <span class="comment"># When `random: true`, YOU MUST FOLLOW the format which has been commented in two title options below.</span></span><br><span class="line">  <span class="comment"># When `random: false`, please fill in the same line of the title option, like `title: one title`.</span></span><br><span class="line">  <span class="attr">random:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Restore the original title after the specified time in milliseconds.</span></span><br><span class="line">  <span class="attr">timeout:</span> <span class="number">2019</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Options when window is hidden.</span></span><br><span class="line">  <span class="attr">hidden:</span></span><br><span class="line">    <span class="attr">favicon:</span> <span class="string">/images/favicon-16x16-next.png</span></span><br><span class="line">    <span class="attr">title:</span></span><br><span class="line">      <span class="comment">#- 404</span></span><br><span class="line">      <span class="comment">#- φ(*￣0￣)</span></span><br><span class="line">      <span class="comment">#- Waiting for you.</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">╭(°A°`)╮</span> <span class="string">页面崩溃啦</span> <span class="string">~</span> <span class="string">|</span> <span class="string">量子广告</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Options when window is visible.</span></span><br><span class="line">  <span class="attr">visible:</span></span><br><span class="line">    <span class="attr">favicon:</span> <span class="string">/images/favicon-16x16-next.png</span></span><br><span class="line">    <span class="attr">title:</span></span><br><span class="line">      <span class="comment">#- 200</span></span><br><span class="line">      <span class="comment">#- (✿◡‿◡)</span></span><br><span class="line">      <span class="comment">#- Welcome back!</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">(ฅ&gt;ω&lt;*ฅ)</span> <span class="string">噫又好了~</span> <span class="string">|</span> <span class="string">量子广告</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="11、评论插件"><a href="#11、评论插件" class="headerlink" title="11、评论插件"></a>11、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by1uZXh0LXV0dGVyYW5j">评论插件<i class="fa fa-external-link-alt"></i></span></h3><p>安装方法：博客根目录执行</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install theme-<span class="keyword">next</span>/hexo-<span class="keyword">next</span>-utteranc</span><br></pre></td></tr></table></figure>
+
+<p><strong>Hexo<code>_config.yml</code>（位于博客的根目录中）中设置选项。或者</strong></p>
+<p><strong>主题<code>_config.yml</code>中设置选项。</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># utteranc评论</span></span><br><span class="line"><span class="comment"># Demo: https://utteranc.es/  http://trumandu.github.io/about/</span></span><br><span class="line"><span class="attr">utteranc:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">aixiu/notes</span> <span class="comment">#Github repo such as :TrumanDu/comments</span></span><br><span class="line">  <span class="attr">pathname:</span> <span class="string">pathname</span></span><br><span class="line">  <span class="comment"># theme: github-light,github-dark,github-dark-orange</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">github-light</span></span><br><span class="line">  <span class="attr">cdn:</span> <span class="string">https://utteranc.es/client.js</span></span><br><span class="line">  <span class="comment"># If you want to modify priority, please config in **hexo**</span></span><br><span class="line">  <span class="comment">#priority:</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="12、文章短链接"><a href="#12、文章短链接" class="headerlink" title="12、文章短链接"></a>12、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvemJvL2hleG8tYWJicmxpbms=">文章短链接<i class="fa fa-external-link-alt"></i></span></h3><p>安装方法：博客根目录执行</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Hexo<code>_config.yml</code>（位于博客的根目录中）中设置选项。</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># permalink: :year/:month/:day/:title/  # 默认样式</span></span><br><span class="line">permalink: :author/:abbrlink/ # 作者/字符串</span><br><span class="line">permalink_defaults: #默认参数可自定义</span><br><span class="line">  author: aixiu</span><br><span class="line"><span class="comment"># 永久链接</span></span><br><span class="line">abbrlink: # 生成</span><br><span class="line">  alg: crc32  # 算法：crc16(default) <span class="keyword">and</span> crc32</span><br><span class="line">  rep: hex    # 进制：dec(default) <span class="keyword">and</span> hex</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: <span class="literal">true</span> # <span class="built_in">Set</span> <span class="keyword">to</span> <span class="literal">false</span> <span class="keyword">to</span> <span class="built_in">remove</span> trailing <span class="string">&#x27;index.html&#x27;</span> <span class="keyword">from</span>   permalinks</span><br><span class="line">  trailing_html: <span class="literal">true</span> # <span class="built_in">Set</span> <span class="keyword">to</span> <span class="literal">false</span> <span class="keyword">to</span> <span class="built_in">remove</span> trailing <span class="string">&#x27;.html&#x27;</span> <span class="keyword">from</span> permalinks</span><br></pre></td></tr></table></figure>
+
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>问题1：</p>
+<p>hexo d后 ERROR Deployer not found: git</p>
+<p>解决：</p>
+<p>这是因为没安装 hexo-deployer-git 插件，在<strong>站点目录</strong>下输入下面的插件安装就好了：</p>
+<blockquote>
+<p>npm install hexo-deployer-git –save</p>
+</blockquote>
+<p>报错2：</p>
+<p>ERROR Plugin load failed: hexo-next-title<br>Error: Cannot find module ‘E:\My_blog\node_modules\next-util\index.js’. Please verify that the package.json has a valid “main” entry</p>
+<p>解决：next-util插件去下载后，发现没有<code>index.js</code> 复制一个就好</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    Buy Me Coffee
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Aixiu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Aixiu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Aixiu
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.ynxiu.com/aixiu/18551676.html" title="Update-hexo-by7.2.2">http://blog.ynxiu.com/aixiu/18551676.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> 插件</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/aixiu/9ea005af.html" rel="prev" title="npm-outdated-explain">
+                  <i class="fa fa-chevron-left"></i> npm-outdated-explain
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/aixiu/4ec920c2.html" rel="next" title="Linux指定目录安装软件及案例">
+                  Linux指定目录安装软件及案例 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">鄂ICP备15017263号 </span>
+  </div>
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YnXiu.com <span class="post-meta-item">|</span> <a target="_blank" rel="noopener" href="http://ynxiu.com">LZ-AD</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">46k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:34</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.ynxiu.com/aixiu/18551676.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.aixiu.ml","jsUrl":null,"el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<!-- 动感标签 -->
+<script type="text/javascript" src="/js/dongganTab.js"></script>
+</body>
+</html>

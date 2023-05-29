@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="//fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="eZIAiI9UOOFS9gGrEGJMCgLmHsUScGGsZTkdsKq5YqY">
+  <meta name="msvalidate.01" content="583F0DD3225A3B6BBCCFDA9F66C1E404">
+  <meta name="baidu-site-verification" content="z9DiSS0RNh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.ynxiu.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":{"twikoo":{"text":"\u003ci class=\"fab fa-gratipay fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> twikoo  | 默认","order":1},"giscus":{"text":"\u003ci class=\"fab fa-github-alt fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> giscus(需github帐号) | 备用","order":2}},"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUpribbon"}},"prism":false,"i18n":{"placeholder":"请输入关键字搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="它用来比较两个文本文件的差异，是代码版本管理的基石之一。你在命令行下，输入：  $ diff &lt;变动前的文件&gt; &lt;变动后的文件&gt;  diff的三种格式由于历史原因，diff有三种格式：  正常格式（normal diff）上下文格式（context diff）合并格式（unified diff）  接下来请看具体示例。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何看明白diff">
+<meta property="og:url" content="http://blog.ynxiu.com/aixiu/bbcd087c.html">
+<meta property="og:site_name" content="量子广告">
+<meta property="og:description" content="它用来比较两个文本文件的差异，是代码版本管理的基石之一。你在命令行下，输入：  $ diff &lt;变动前的文件&gt; &lt;变动后的文件&gt;  diff的三种格式由于历史原因，diff有三种格式：  正常格式（normal diff）上下文格式（context diff）合并格式（unified diff）  接下来请看具体示例。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-06-08T09:43:49.000Z">
+<meta property="article:modified_time" content="2016-06-08T09:43:49.000Z">
+<meta property="article:author" content="Aixiu">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="命令">
+<meta property="article:tag" content="Diff">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.ynxiu.com/aixiu/bbcd087c.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.ynxiu.com/aixiu/bbcd087c.html","path":"aixiu/bbcd087c.html","title":"如何看明白diff"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何看明白diff | 量子广告</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?e1515d81cb5b44b88bfce41938a6921a"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="量子广告" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">量子广告</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">协作发展&bull;畅想双赢</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>链接</a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-other"><a href="/other/" rel="section"><i class="fa fa-flask fa-fw"></i>其它</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="请输入关键字搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#diff%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">diff的三种格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">示例文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%B8%B8%E6%A0%BC%E5%BC%8F%E7%9A%84diff"><span class="nav-number">3.</span> <span class="nav-text">正常格式的diff</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%BC%E5%BC%8F%E7%9A%84diff"><span class="nav-number">4.</span> <span class="nav-text">上下文格式的diff</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%A0%BC%E5%BC%8F%E7%9A%84diff"><span class="nav-number">5.</span> <span class="nav-text">合并格式的diff</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git%E6%A0%BC%E5%BC%8F%E7%9A%84diff"><span class="nav-number">6.</span> <span class="nav-text">git格式的diff</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Aixiu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Aixiu</p>
+  <div class="site-description" itemprop="description">专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpeGl1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aixiu"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0L3UvYWl4aXU=" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;aixiu"><i class="fab fa-gg fa-fw"></i>Coding</span>
+      </span>
+  </div>
+<div id="chakhsu" class="site-description" itemprop="description">
+  <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } 
+  /*以下内容自定义修改*/ 
+  var l = "量子广告-", o = ["协作发展", "畅想双赢", "承接各类户内外广告","passion & love"].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); 
+  </script> 
+<div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.ynxiu.com/aixiu/bbcd087c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Aixiu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="量子广告">
+      <meta itemprop="description" content="专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何看明白diff | 量子广告">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何看明白diff
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-06-08 09:43:49" itemprop="dateCreated datePublished" datetime="2016-06-08T09:43:49+00:00">2016-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>它用来比较两个文本文件的差异，是代码版本管理的基石之一。你在命令行下，输入：</p>
+<blockquote>
+<p>$ diff &lt;变动前的文件&gt; &lt;变动后的文件&gt;</p>
+</blockquote>
+<h1 id="diff的三种格式"><a href="#diff的三种格式" class="headerlink" title="diff的三种格式"></a>diff的三种格式</h1><p>由于历史原因，diff有三种格式：</p>
+<blockquote>
+<p>正常格式（normal diff）<br>上下文格式（context diff）<br>合并格式（unified diff）</p>
+</blockquote>
+<p>接下来请看具体示例。</p>
+<span id="more"></span>
+
+<h1 id="示例文件"><a href="#示例文件" class="headerlink" title="示例文件"></a>示例文件</h1><p>为了便于讲解，先新建两个示例文件。<br>第一个文件叫做f1，内容是每行一个a，一共7行。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+<p>第二个文件叫做f2，修改f1而成，第4行变成b，其他不变。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">b</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+<h1 id="正常格式的diff"><a href="#正常格式的diff" class="headerlink" title="正常格式的diff"></a>正常格式的diff</h1><p>现在对f1和f2进行比较：<br>　　$ diff f1 f2<br>这时，diff就会显示正常格式的结果：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="number">4</span>c4</span><br><span class="line">　　&lt; <span class="selector-tag">a</span></span><br><span class="line">　　---</span><br><span class="line">　　&gt; <span class="selector-tag">b</span></span><br></pre></td></tr></table></figure>
+<p>第一行是一个提示，用来说明变动位置。<br><code> 4c4</code><br>它分成三个部分：前面的”4”，表示f1的第4行有变化；中间的”c”表示变动的模式是内容改变（change），其他模式还有”增加”（a，代表addition）和”删除”（d，代表deletion）；后面的”4”，表示变动后变成f2的第4行。<br>第二行分成两个部分。<br><code> &lt; a</code><br>前面的小于号，表示要从f1当中去除该行（也就是第4行），后面的”a”表示该行的内容。<br>第三行用来分割f1和f2。<br><code> ---</code><br>第四行，类似于第二行。<br><code> \&gt; b</code><br>前面的大于号表示f2增加了该行，后面的”b”表示该行的内容。<br>最早的Unix（即AT&amp;T版本的Unix），使用的就是这种格式的diff。</p>
+<h1 id="上下文格式的diff"><a href="#上下文格式的diff" class="headerlink" title="上下文格式的diff"></a>上下文格式的diff</h1><p>上个世纪80年代初，加州大学伯克利分校推出BSD版本的Unix时，觉得diff的显示结果太简单，最好加入上下文，便于了解发生的变动。因此，推出了上下文格式的diff。<br>它的使用方法是加入c参数（代表context）。<br><code>$ diff -c f1 f2</code><br>显示结果如下：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">　　*** <span class="selector-tag">f1</span>	<span class="number">2012</span><span class="selector-tag">-08-29</span> <span class="number">16</span>:<span class="number">45</span>:<span class="number">41.000000000</span> +<span class="number">0800</span></span><br><span class="line">　　<span class="selector-tag">---</span> <span class="selector-tag">f2</span>	<span class="number">2012</span><span class="selector-tag">-08-29</span> <span class="number">16</span>:<span class="number">45</span>:<span class="number">51.000000000</span> +<span class="number">0800</span></span><br><span class="line">　　***************</span><br><span class="line">　　*** <span class="number">1</span>,<span class="number">7</span> ****</span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　!<span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">---</span> <span class="number">1</span>,<span class="number">7</span> <span class="selector-tag">----</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　!<span class="selector-tag">b</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+<p>这个结果分成四个部分。<br>第一部分的两行，显示两个文件的基本情况：文件名和时间信息。</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　*** f<span class="number">1	2012-08</span>-<span class="number">29 16:45:41</span>.<span class="number">000000000</span> +<span class="number">0800</span></span><br><span class="line">　　--- f<span class="number">2	2012-08</span>-<span class="number">29 16:45:51</span>.<span class="number">000000000</span> +<span class="number">0800</span></span><br></pre></td></tr></table></figure>
+<p>“***”表示变动前的文件，”—“表示变动后的文件。<br>第二部分是15个星号，将文件的基本情况与变动内容分割开。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="strong">*****</span><span class="strong">*****</span><span class="strong">*****</span></span><br></pre></td></tr></table></figure>
+<p>第三部分显示变动前的文件，即f1。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">　　*** <span class="number">1</span>,<span class="number">7</span> ****</span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　!<span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+<p>这时不仅显示发生变化的第4行，还显示第4行的前面三行和后面三行，因此一共显示7行。所以，前面的<code>*** 1,7 ****</code>就表示，从第1行开始连续7行。<br>另外，文件内容的每一行最前面，还有一个标记位。如果为空，表示该行无变化；如果是感叹号（!），表示该行有改动；如果是减号（-），表示该行被删除；如果是加号（+），表示该行为新增。<br>第四部分显示变动后的文件，即f2。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">　　--- <span class="number">1</span>,<span class="number">7</span> ----</span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　!<span class="selector-tag">b</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+<p>除了变动行（第4行）以外，也是上下文各显示三行，总共显示7行。</p>
+<h1 id="合并格式的diff"><a href="#合并格式的diff" class="headerlink" title="合并格式的diff"></a>合并格式的diff</h1><p>如果两个文件相似度很高，那么上下文格式的diff，将显示大量重复的内容，很浪费空间。1990年，GNU diff率先推出了”合并格式”的diff，将f1和f2的上下文合并在一起显示。<br>它的使用方法是加入u参数（代表unified）。</p>
+<blockquote>
+<p>$ diff -u f1 f2</p>
+</blockquote>
+<p>显示结果如下：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="comment">--- f1	2012-08-29 16:45:41.000000000 +0800</span></span><br><span class="line">　　+++ f2	<span class="number">2012</span><span class="number">-08</span><span class="number">-29</span> <span class="number">16</span>:<span class="number">45</span>:<span class="number">51.000000000</span> +<span class="number">0800</span></span><br><span class="line">　　@@ <span class="number">-1</span>,<span class="number">7</span> +<span class="number">1</span>,<span class="number">7</span> @@</span><br><span class="line">　　 <span class="keyword">a</span></span><br><span class="line">　　 <span class="keyword">a</span></span><br><span class="line">　　 <span class="keyword">a</span></span><br><span class="line">　　-<span class="keyword">a</span></span><br><span class="line">　　+b</span><br><span class="line">　　 <span class="keyword">a</span></span><br><span class="line">　　 <span class="keyword">a</span></span><br><span class="line">　　 <span class="keyword">a</span></span><br></pre></td></tr></table></figure>
+<p>它的第一部分，也是文件的基本信息。</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　--- f<span class="number">1	2012-08</span>-<span class="number">29 16:45:41</span>.<span class="number">000000000</span> +<span class="number">0800</span></span><br><span class="line">　　+++ f<span class="number">2	2012-08</span>-<span class="number">29 16:45:51</span>.<span class="number">000000000</span> +<span class="number">0800</span></span><br></pre></td></tr></table></figure>
+<p>“—“表示变动前的文件，”+++”表示变动后的文件。<br>第二部分，变动的位置用两个@作为起首和结束。<br>　　@@ -1,7 +1,7 @@<br>前面的”-1,7”分成三个部分：减号表示第一个文件（即f1），”1”表示第1行，”7”表示连续7行。合在一起，就表示下面是第一个文件从第1行开始的连续7行。同样的，”+1,7”表示变动后，成为第二个文件从第1行开始的连续7行。<br>第三部分是变动的具体内容。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　-<span class="selector-tag">a</span></span><br><span class="line">　　+<span class="selector-tag">b</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+<p>除了有变动的那些行以外，也是上下文各显示3行。它将两个文件的上下文，合并显示在一起，所以叫做”合并格式”。每一行最前面的标志位，空表示无变动，减号表示第一个文件删除的行，加号表示第二个文件新增的行。</p>
+<h1 id="git格式的diff"><a href="#git格式的diff" class="headerlink" title="git格式的diff"></a>git格式的diff</h1><p>版本管理系统git，使用的是合并格式diff的变体。</p>
+<blockquote>
+<p>$ git diff</p>
+</blockquote>
+<p>显示结果如下：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="selector-tag">diff</span> <span class="selector-tag">--git</span> <span class="selector-tag">a</span>/<span class="selector-tag">f1</span> <span class="selector-tag">b</span>/<span class="selector-tag">f1</span></span><br><span class="line">　　<span class="selector-tag">index</span> <span class="number">6</span><span class="selector-tag">f8a38c</span>.<span class="selector-class">.449b072</span> <span class="number">100644</span></span><br><span class="line">　　<span class="selector-tag">---</span> <span class="selector-tag">a</span>/<span class="selector-tag">f1</span></span><br><span class="line">　　+++ <span class="selector-tag">b</span>/<span class="selector-tag">f1</span></span><br><span class="line">　　@@ <span class="selector-tag">-1</span>,<span class="number">7</span> +<span class="number">1</span>,<span class="number">7</span> @@</span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">-a</span></span><br><span class="line">　　+<span class="selector-tag">b</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+<p>第一行表示结果为git格式的diff。</p>
+<p><code>diff --git a/f1 b/f1</code></p>
+<p>进行比较的是，a版本的f1（即变动前）和b版本的f1（即变动后）。<br>第二行表示两个版本的git哈希值（index区域的6f8a38c对象，与工作目录区域的449b072对象进行比较），最后的六位数字是对象的模式（普通文件，644权限）。<br><code>index 6f8a38c..449b072 100644</code><br>第三行表示进行比较的两个文件。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　--- a/<span class="built_in">f1</span></span><br><span class="line">　　+++ b/<span class="built_in">f1</span></span><br></pre></td></tr></table></figure>
+<p>“—“表示变动前的版本，”+++”表示变动后的版本。<br>后面的行都与官方的合并格式diff相同。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">　　@@ <span class="selector-tag">-1</span>,<span class="number">7</span> +<span class="number">1</span>,<span class="number">7</span> @@</span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　<span class="selector-tag">-a</span></span><br><span class="line">　　+<span class="selector-tag">b</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br><span class="line">　　 <span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+
+
+<p>本文引用于<span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTIvMDgvaG93X3RvX3JlYWRfZGlmZi5odG1s" title="大神">一峰的文章<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    Buy Me Coffee
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Aixiu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Aixiu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Aixiu
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.ynxiu.com/aixiu/bbcd087c.html" title="如何看明白diff">http://blog.ynxiu.com/aixiu/bbcd087c.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"><i class="fa fa-tag"></i> Git</a>
+              <a href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag"><i class="fa fa-tag"></i> 命令</a>
+              <a href="/tags/Diff/" rel="tag"><i class="fa fa-tag"></i> Diff</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/aixiu/2057e4c3.html" rel="prev" title="NexT主题'留言'页面增加最近访客">
+                  <i class="fa fa-chevron-left"></i> NexT主题'留言'页面增加最近访客
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/aixiu/e3aa7b8f.html" rel="next" title="Git中的.gitignore的语法规范">
+                  Git中的.gitignore的语法规范 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">鄂ICP备15017263号 </span>
+  </div>
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YnXiu.com <span class="post-meta-item">|</span> <a target="_blank" rel="noopener" href="http://ynxiu.com">LZ-AD</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">46k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:34</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.ynxiu.com/aixiu/bbcd087c.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.aixiu.ml","jsUrl":null,"el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<!-- 动感标签 -->
+<script type="text/javascript" src="/js/dongganTab.js"></script>
+</body>
+</html>

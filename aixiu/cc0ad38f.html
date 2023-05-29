@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="//fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="eZIAiI9UOOFS9gGrEGJMCgLmHsUScGGsZTkdsKq5YqY">
+  <meta name="msvalidate.01" content="583F0DD3225A3B6BBCCFDA9F66C1E404">
+  <meta name="baidu-site-verification" content="z9DiSS0RNh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.ynxiu.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":{"twikoo":{"text":"\u003ci class=\"fab fa-gratipay fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> twikoo  | 默认","order":1},"giscus":{"text":"\u003ci class=\"fab fa-github-alt fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> giscus(需github帐号) | 备用","order":2}},"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUpribbon"}},"prism":false,"i18n":{"placeholder":"请输入关键字搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本帖所有脚本均来自互联网，本站仅对这些脚本进行收集，以方便自己及各位基友使用。本站不对其可用性负责，也不对其安全性等任何方面负责。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VPS&#x2F;服务器常用脚本合集">
+<meta property="og:url" content="http://blog.ynxiu.com/aixiu/cc0ad38f.html">
+<meta property="og:site_name" content="量子广告">
+<meta property="og:description" content="本帖所有脚本均来自互联网，本站仅对这些脚本进行收集，以方便自己及各位基友使用。本站不对其可用性负责，也不对其安全性等任何方面负责。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/eb0b187edcf0b30.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/c81e728d9d4c2f6-6.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/0211e8160d7f43c.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/a87ff679a2f3e71-5.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/3805675944f69b5.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/66fc2fcd68a9228.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/adc6dec04348608.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/b2f4ab52cb094b3.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/45c48cce2e2d7fb-1-e1675141478275.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/3732dc439f152a5.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/6512bd43d9caa6e-1.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/c20ad4d76fe9775-1.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/155e331eb64216b.jpg">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/aab3238922bcc25-4.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/9bf31c7ff062936-1.jpg">
+<meta property="article:published_time" content="2023-03-23T10:01:29.000Z">
+<meta property="article:modified_time" content="2023-03-23T10:01:29.000Z">
+<meta property="article:author" content="Aixiu">
+<meta property="article:tag" content="VPS">
+<meta property="article:tag" content="脚本">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.ynxiu.com/aixiu/cc0ad38f/eb0b187edcf0b30.jpg">
+
+
+<link rel="canonical" href="http://blog.ynxiu.com/aixiu/cc0ad38f.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.ynxiu.com/aixiu/cc0ad38f.html","path":"aixiu/cc0ad38f.html","title":"VPS/服务器常用脚本合集"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VPS/服务器常用脚本合集 | 量子广告</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?e1515d81cb5b44b88bfce41938a6921a"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="量子广告" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">量子广告</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">协作发展&bull;畅想双赢</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>链接</a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-other"><a href="/other/" rel="section"><i class="fa fa-flask fa-fw"></i>其它</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="请输入关键字搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BCPU%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">查看CPU信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%86%85%E6%A0%B8%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">查看当前内核信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E6%89%BE%E8%BF%9B%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">关键字查找进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E6%9B%B4%E6%94%B9-%E5%BC%80%E5%90%AFBBR%E3%80%81%E6%9B%B4%E6%8D%A2BBRplus%E7%AD%89"><span class="nav-number">5.</span> <span class="nav-text">内核更改 [开启BBR、更换BBRplus等]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">6.</span> <span class="nav-text">Linux修改主机名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%94%AE%E5%BC%80%E5%90%AF-x2F-%E5%85%B3%E9%97%ADSwap"><span class="nav-number">7.</span> <span class="nav-text">一键开启&#x2F;关闭Swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%9D%E5%90%88%E6%80%AA%E6%B5%8B%E8%AF%84"><span class="nav-number">8.</span> <span class="nav-text">缝合怪测评</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP%E8%B4%A8%E9%87%8F%E6%B5%8B%E8%AF%95"><span class="nav-number">9.</span> <span class="nav-text">IP质量测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bench-%E2%80%93-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF-I-x2F-O-%E6%B5%8B%E9%80%9F"><span class="nav-number">10.</span> <span class="nav-text">Bench – 系统信息+I&#x2F;O+测速</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SuperBench-%E2%80%93-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF-I-x2F-O-%E6%B5%8B%E9%80%9F"><span class="nav-number">11.</span> <span class="nav-text">SuperBench – 系统信息+I&#x2F;O+测速</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HyperSpeed-%E4%B8%80%E9%94%AE%E6%B5%8B%E9%80%9F"><span class="nav-number">12.</span> <span class="nav-text">HyperSpeed 一键测速</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Besttrace-%E7%9B%B4%E6%8E%A5%E6%98%BE%E7%A4%BA%E5%9B%9E%E7%A8%8B%E7%BA%BF%E8%B7%AF"><span class="nav-number">13.</span> <span class="nav-text">Besttrace 直接显示回程线路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">13.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Backtrace-%E4%B8%89%E7%BD%91%E5%9B%9E%E7%A8%8B%E8%B7%AF%E7%94%B1%E6%B5%8B%E8%AF%95"><span class="nav-number">14.</span> <span class="nav-text">Backtrace 三网回程路由测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-1"><span class="nav-number">14.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BestTrace-%E5%9B%9E%E7%A8%8B%E6%B5%8B%E8%AF%95"><span class="nav-number">15.</span> <span class="nav-text">BestTrace 回程测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E7%A8%8B%E6%B5%8B%E8%AF%95-Nanqinlang%E5%A4%A7%E4%BD%AC%E4%BD%9C%E5%93%81"><span class="nav-number">16.</span> <span class="nav-text">回程测试 [Nanqinlang大佬作品]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-2"><span class="nav-number">16.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UnixBench-sh-%E7%A7%8B%E6%B0%B4%E9%80%B8%E5%86%B0%E5%A4%A7%E4%BD%AC%E4%BD%9C%E5%93%81"><span class="nav-number">17.</span> <span class="nav-text">UnixBench.sh [秋水逸冰大佬作品]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-3"><span class="nav-number">17.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LemonBench-sh"><span class="nav-number">18.</span> <span class="nav-text">LemonBench.sh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Yabs-sh-Masonr%E5%A4%A7%E4%BD%AC%E4%BD%9C%E5%93%81"><span class="nav-number">19.</span> <span class="nav-text">Yabs.sh [Masonr大佬作品]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%A3%E9%94%81%E6%B5%8B%E8%AF%95-Lmc999%E5%A4%A7%E4%BD%AC%E4%BD%9C%E5%93%81"><span class="nav-number">20.</span> <span class="nav-text">流媒体解锁测试 [Lmc999大佬作品]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%AA%92%E4%BD%93%E8%A7%A3%E9%94%81%E6%B5%8B%E8%AF%95-LovelyHaochi%E5%A4%A7%E4%BD%AC%E4%BD%9C%E5%93%81"><span class="nav-number">21.</span> <span class="nav-text">流媒体解锁测试 [LovelyHaochi大佬作品]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-4"><span class="nav-number">21.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E6%9D%9C%E7%94%AB%E4%BD%BF%E7%94%A8-%E6%9C%AC%E8%84%9A%E6%9C%AC%E6%94%AF%E6%8C%81%E6%9F%A5%E7%9C%8BI-x2F-O-bench%E4%BB%A5%E5%8F%8Asystem-info"><span class="nav-number">22.</span> <span class="nav-text">推荐杜甫使用-本脚本支持查看I&#x2F;O bench以及system info</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-5"><span class="nav-number">22.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%9525%E7%AB%AF%E5%8F%A3%E6%98%AF%E5%90%A6%E5%BC%80%E6%94%BE"><span class="nav-number">23.</span> <span class="nav-text">测试25端口是否开放</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Aixiu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Aixiu</p>
+  <div class="site-description" itemprop="description">专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpeGl1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aixiu"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0L3UvYWl4aXU=" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;aixiu"><i class="fab fa-gg fa-fw"></i>Coding</span>
+      </span>
+  </div>
+<div id="chakhsu" class="site-description" itemprop="description">
+  <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } 
+  /*以下内容自定义修改*/ 
+  var l = "量子广告-", o = ["协作发展", "畅想双赢", "承接各类户内外广告","passion & love"].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); 
+  </script> 
+<div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.ynxiu.com/aixiu/cc0ad38f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Aixiu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="量子广告">
+      <meta itemprop="description" content="专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VPS/服务器常用脚本合集 | 量子广告">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VPS/服务器常用脚本合集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-23 10:01:29" itemprop="dateCreated datePublished" datetime="2023-03-23T10:01:29+00:00">2023-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">技术探讨</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本帖所有脚本均来自互联网，本站仅对这些脚本进行收集，以方便自己及各位基友使用。本站不对其可用性负责，也不对其安全性等任何方面负责。</p>
+ <span id="more"></span>
+
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>查看CPU信息</li>
+<li>查看当前内核信息</li>
+<li>关键字查找进程</li>
+<li>内核更改 [开启BBR、更换BBRplus等]</li>
+<li>Linux修改主机名</li>
+<li>一键开启&#x2F;关闭Swap</li>
+<li>缝合怪测评</li>
+<li>IP质量测试</li>
+<li>Bench – 系统信息+I&#x2F;O+测速</li>
+<li>SuperBench – 系统信息+I&#x2F;O+测速</li>
+<li>HyperSpeed 一键测速</li>
+<li>Besttrace 直接显示回程线路</li>
+<li>Backtrace 三网回程路由测试</li>
+<li>BestTrace 回程测试</li>
+<li>回程测试 [Nanqinlang大佬作品]</li>
+<li>UnixBench.sh [秋水逸冰大佬作品]</li>
+<li>LemonBench.sh</li>
+<li>Yabs.sh [Masonr大佬作品]</li>
+<li>流媒体解锁测试 [Lmc999大佬作品]</li>
+<li>流媒体解锁测试 [LovelyHaochi大佬作品]</li>
+<li>推荐杜甫使用-本脚本支持查看I&#x2F;O bench以及system info</li>
+<li>测试25端口是否开放</li>
+</ul>
+<h2 id="查看CPU信息"><a href="#查看CPU信息" class="headerlink" title="查看CPU信息"></a>查看CPU信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/cc0ad38f/eb0b187edcf0b30.jpg" alt="img"></p>
+<h2 id="查看当前内核信息"><a href="#查看当前内核信息" class="headerlink" title="查看当前内核信息"></a>查看当前内核信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/cc0ad38f/c81e728d9d4c2f6-6.jpg" alt="img"></p>
+<h2 id="关键字查找进程"><a href="#关键字查找进程" class="headerlink" title="关键字查找进程"></a>关键字查找进程</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep &lt;进程关键字&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="内核更改-开启BBR、更换BBRplus等"><a href="#内核更改-开启BBR、更换BBRplus等" class="headerlink" title="内核更改 [开启BBR、更换BBRplus等]"></a>内核更改 [开启BBR、更换BBRplus等]</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Centos</span><br><span class="line">yum install ca-certificates wget -y &amp;&amp; update-ca-trust force-enable </span><br><span class="line">Debian/Ubuntu： </span><br><span class="line">apt-get install ca-certificates wget -y &amp;&amp; update-ca-certificates </span><br><span class="line"></span><br><span class="line">不卸载内核版本： </span><br><span class="line">wget -O tcpx.sh &quot;https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcpx.sh&quot; &amp;&amp; chmod +x tcpx.sh &amp;&amp; ./tcpx.sh </span><br><span class="line"></span><br><span class="line">卸载内核版本： </span><br><span class="line">wget -O tcp.sh &quot;https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh&quot; &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/cc0ad38f/0211e8160d7f43c.jpg" alt="img"></p>
+<h2 id="Linux修改主机名"><a href="#Linux修改主机名" class="headerlink" title="Linux修改主机名"></a>Linux修改主机名</h2><p>首先执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname &lt;newhostname&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后执行下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>在第二行增加一个 <code>127.0.0.1 &lt;newhostname&gt;</code>，同时将文件中的原主机名修改为刚设置的新主机名</p>
+<p><img src="/aixiu/cc0ad38f/a87ff679a2f3e71-5.jpg" alt="img"></p>
+<h2 id="一键开启-x2F-关闭Swap"><a href="#一键开启-x2F-关闭Swap" class="headerlink" title="一键开启&#x2F;关闭Swap"></a>一键开启&#x2F;关闭Swap</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.moerats.com/usr/shell/swap.sh &amp;&amp; bash swap.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="缝合怪测评"><a href="#缝合怪测评" class="headerlink" title="缝合怪测评"></a>缝合怪测评</h2><ul>
+<li>自由组合测试方向和单项测试以及合集收录第三方脚本–原创</li>
+<li>基础系统信息–感谢teddysun和superbench和yabs开源</li>
+<li>CPU测试–感谢lemonbench开源</li>
+<li>内存测试–感谢lemonbench开源</li>
+<li>磁盘IO读写测试–感谢lemonbench开源</li>
+<li>硬盘IO读写测试–感谢yabs开源</li>
+<li>御三家流媒体解锁–感谢sjlleo的二进制文件</li>
+<li>常用流媒体解锁–感谢RegionRestrictionCheck开源</li>
+<li>Tiktok解锁–感谢lmc999的开源</li>
+<li>三网回程以及路由延迟–感谢zhanghanyun&#x2F;backtrace开源</li>
+<li>回程路由以及带宽类型检测(商宽&#x2F;家宽&#x2F;数据中心)–由fscarmen的PR以及本人的技术思路提供</li>
+<li>端口检测(检测是否被墙)–由fscarmen的PR以及作者的技术思路提供 – 待修复</li>
+<li>IP质量检测(检测IP白不白)(含IPV4和IPV6)–独创，感谢互联网提供的查询资源</li>
+<li>speedtest测速–由teddysun和superspeed的开源以及整理</li>
+<li>全国网络延迟测试–感谢IPASN开源</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(wget -qO- --no-check-certificate https://gitlab.com/spiritysdx/za/-/raw/main/ecs.sh) </span><br><span class="line">或 </span><br><span class="line">bash &lt;(wget -qO- --no-check-certificate https://github.com/spiritLHLS/ecs/raw/main/ecs.sh)</span><br></pre></td></tr></table></figure>
+
+<h2 id="IP质量测试"><a href="#IP质量测试" class="headerlink" title="IP质量测试"></a>IP质量测试</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(wget -qO- --no-check-certificate https://gitlab.com/spiritysdx/za/-/raw/main/qzcheck.sh) </span><br><span class="line">或 </span><br><span class="line">bash &lt;(wget -qO- --no-check-certificate https://github.com/spiritLHLS/ecs/raw/main/qzcheck.sh)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/cc0ad38f/3805675944f69b5.jpg" alt="img"></p>
+<h2 id="Bench-–-系统信息-I-x2F-O-测速"><a href="#Bench-–-系统信息-I-x2F-O-测速" class="headerlink" title="Bench – 系统信息+I&#x2F;O+测速"></a>Bench – 系统信息+I&#x2F;O+测速</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- bench.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/cc0ad38f/66fc2fcd68a9228.jpg" alt="img"></p>
+<h2 id="SuperBench-–-系统信息-I-x2F-O-测速"><a href="#SuperBench-–-系统信息-I-x2F-O-测速" class="headerlink" title="SuperBench – 系统信息+I&#x2F;O+测速"></a>SuperBench – 系统信息+I&#x2F;O+测速</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- git.io/superbench.sh | bash </span><br><span class="line">或 </span><br><span class="line">wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/cc0ad38f/adc6dec04348608.jpg" alt="img"></p>
+<h2 id="HyperSpeed-一键测速"><a href="#HyperSpeed-一键测速" class="headerlink" title="HyperSpeed 一键测速"></a>HyperSpeed 一键测速</h2><ul>
+<li>支持单线程、8线程测速，显示延迟与抖动</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -Lso- https://bench.im/hyperspeed) </span><br><span class="line">或 </span><br><span class="line">bash &lt;(wget -qO- https://bench.im/hyperspeed)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/cc0ad38f/b2f4ab52cb094b3.jpg" alt="img"></p>
+<h2 id="Besttrace-直接显示回程线路"><a href="#Besttrace-直接显示回程线路" class="headerlink" title="Besttrace 直接显示回程线路"></a>Besttrace 直接显示回程线路</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- git.io/besttrace | bash</span><br></pre></td></tr></table></figure>
+
+<h3 id><a href="#" class="headerlink" title></a><img src="/aixiu/cc0ad38f/45c48cce2e2d7fb-1-e1675141478275.jpg" alt="img"></h3><p><strong>（</strong> * *<strong>部分截图* ）</strong></p>
+<h2 id="Backtrace-三网回程路由测试"><a href="#Backtrace-三网回程路由测试" class="headerlink" title="Backtrace 三网回程路由测试"></a>Backtrace 三网回程路由测试</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh -sSf | sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="-1"><a href="#-1" class="headerlink" title></a><img src="/aixiu/cc0ad38f/3732dc439f152a5.jpg" alt="img"></h3><h2 id="BestTrace-回程测试"><a href="#BestTrace-回程测试" class="headerlink" title="BestTrace 回程测试"></a>BestTrace 回程测试</h2><ul>
+<li>ipip.net 提供的手动输入IP测试回程线路工具</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mkdir /root/besttrace </span><br><span class="line">cd /root/besttrace </span><br><span class="line">wget https://cdn.ipip.net/17mon/besttrace4linux.zip </span><br><span class="line">unzip besttrace4linux.zip </span><br><span class="line"></span><br><span class="line">解压之后会看到几个二进制文件,根据自己的系统选择对应文件。常用的： </span><br><span class="line"></span><br><span class="line">Linux X64系统： </span><br><span class="line">chmod +x besttrace </span><br><span class="line">./besttrace xxx.xxx.xxx.xxx   # 此处输入需测试IP </span><br><span class="line"></span><br><span class="line">Linux X32位系统： </span><br><span class="line">chmod +x besttrace32 </span><br><span class="line">./besttrace32 xxx.xxx.xxx.xxx   # 此处输入需测试IP </span><br><span class="line"></span><br><span class="line">ARM机型： </span><br><span class="line">chmod +x besttracearm </span><br><span class="line">./besttracearm xxx.xxx.xxx.xxx   # 此处输入需测试IP</span><br></pre></td></tr></table></figure>
+
+<h2 id="回程测试-Nanqinlang大佬作品"><a href="#回程测试-Nanqinlang大佬作品" class="headerlink" title="回程测试 [Nanqinlang大佬作品]"></a>回程测试 [Nanqinlang大佬作品]</h2><ul>
+<li>支持选择节点测试，四网快速测试，手动输入IP测试三种模式</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/nanqinlang-script/testrace/master/testrace.sh &amp;&amp; bash testrace.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="-2"><a href="#-2" class="headerlink" title></a><img src="/aixiu/cc0ad38f/6512bd43d9caa6e-1.jpg" alt="img"></h3><p><strong>（</strong> * *<strong>部分截图* ）</strong></p>
+<h2 id="UnixBench-sh-秋水逸冰大佬作品"><a href="#UnixBench-sh-秋水逸冰大佬作品" class="headerlink" title="UnixBench.sh [秋水逸冰大佬作品]"></a>UnixBench.sh [秋水逸冰大佬作品]</h2><ul>
+<li>UnixBench是一个类unix系（Unix，BSD，Linux）统下的性能测试工具，一个开源工具，被广泛用与测试Linux系统主机的性能。Unixbench的主要测试项目有：系统调用、读写、进程、图形化测试、2D、3D、管道、运算、C库等系统基准性能提供测试数据。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh &amp;&amp; chmod +x unixbench.sh &amp;&amp; ./unixbench.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="-3"><a href="#-3" class="headerlink" title></a><img src="/aixiu/cc0ad38f/c20ad4d76fe9775-1.jpg" alt="img"></h3><h2 id="LemonBench-sh"><a href="#LemonBench-sh" class="headerlink" title="LemonBench.sh"></a>LemonBench.sh</h2><ul>
+<li>LemonBench工具(别名LBench、柠檬Bench)，是一款针对Linux服务器设计的服务器性能测试工具。通过综合测试，可以快速评估服务器的综合性能，为使用者提供服务器硬件配置信息。目前涵盖的测试有：服务器基础信息 (CPU信息&#x2F;内存信息&#x2F;Swap信息&#x2F;磁盘空间信息&#x2F;网络信息等)，流媒体解锁测试 (目前支持HBO Now&#x2F;动画疯&#x2F;B站港澳台&#x2F;B站台湾限定)，系统性能测试 (CPU&#x2F;内存&#x2F;磁盘)，Speedtest网速测试 (本地到最近源及国内各地域不同线路的网速)，路由追踪测试 (追踪到国内和海外不同线路的路由信息)。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">快速测试：</span><br><span class="line">curl -fsL https://ilemonra.in/LemonBenchIntl | bash -s fast </span><br><span class="line"></span><br><span class="line">完整测试： </span><br><span class="line">curl -fsL https://ilemonra.in/LemonBenchIntl | bash -s full</span><br></pre></td></tr></table></figure>
+
+<h2 id="Yabs-sh-Masonr大佬作品"><a href="#Yabs-sh-Masonr大佬作品" class="headerlink" title="Yabs.sh [Masonr大佬作品]"></a>Yabs.sh [Masonr大佬作品]</h2><ul>
+<li>又一个 Linux VPS 一键测评脚本，可以一键测试 VPS 硬盘的读写速度、网络带宽也就是下载速度、CPU 跑分（包括 Geekbench 4 和 Geekbench 5），以及各种性能测试等。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- yabs.sh | bash </span><br><span class="line">或 </span><br><span class="line">curl -sL yabs.sh | bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="流媒体解锁测试-Lmc999大佬作品"><a href="#流媒体解锁测试-Lmc999大佬作品" class="headerlink" title="流媒体解锁测试 [Lmc999大佬作品]"></a>流媒体解锁测试 [Lmc999大佬作品]</h2><ul>
+<li>本脚本基于CoiaPrant&#x2F;MediaUnlock_Test代码进行修改，支持OS&#x2F;Platform：CentOS 6+, Ubuntu 14.04+, Debian 8+, MacOS, Android with Termux。</li>
+<li>Github项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xtYzk5OS9SZWdpb25SZXN0cmljdGlvbkNoZWNr">https://github.com/lmc999/RegionRestrictionCheck<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -L -s check.unlock.media) </span><br><span class="line"></span><br><span class="line">尾部添加参数的释义： </span><br><span class="line">-M 4      只检测IPv4结果 </span><br><span class="line">-M 6      只检测IPv6结果 </span><br><span class="line">-I eth0    指定检测的网卡名称（例：eth0） </span><br><span class="line">-E        选择脚本语言为英文</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/cc0ad38f/155e331eb64216b.jpg" alt="img"></p>
+<h2 id="流媒体解锁测试-LovelyHaochi大佬作品"><a href="#流媒体解锁测试-LovelyHaochi大佬作品" class="headerlink" title="流媒体解锁测试 [LovelyHaochi大佬作品]"></a>流媒体解锁测试 [LovelyHaochi大佬作品]</h2><ul>
+<li>支持多个流媒体的ipv4与ipv6解锁情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -sSL &quot;https://git.io/JswGm&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="-4"><a href="#-4" class="headerlink" title></a><img src="/aixiu/cc0ad38f/aab3238922bcc25-4.png" alt="img"></h3><h2 id="推荐杜甫使用-本脚本支持查看I-x2F-O-bench以及system-info"><a href="#推荐杜甫使用-本脚本支持查看I-x2F-O-bench以及system-info" class="headerlink" title="推荐杜甫使用-本脚本支持查看I&#x2F;O bench以及system info"></a>推荐杜甫使用-本脚本支持查看I&#x2F;O bench以及system info</h2><ul>
+<li>支持查看硬件信息，硬盘通电时间，io等脚本，适合独立服务器使用，vps也能用。</li>
+<li>Github项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0FuaXZlcnNlL0E=">https://github.com/Aniverse/A<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -q https://github.com/Aniverse/A/raw/i/a &amp;&amp; bash a</span><br></pre></td></tr></table></figure>
+
+<h3 id="-5"><a href="#-5" class="headerlink" title></a><img src="/aixiu/cc0ad38f/9bf31c7ff062936-1.jpg" alt="img"></h3><h2 id="测试25端口是否开放"><a href="#测试25端口是否开放" class="headerlink" title="测试25端口是否开放"></a>测试25端口是否开放</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet smtp.aol.com 25</span><br></pre></td></tr></table></figure>
+
+<p>如果看到类似下面的回显，则说明端口是开放的：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Trying 74.6.141.50…</span><br><span class="line">Connected to smtp.aol.g03.yahoodns.net.</span><br><span class="line">Escape character is ‘^]’.</span><br><span class="line">220 smtp.mail.yahoo.com ESMTP ready</span><br></pre></td></tr></table></figure>
+
+<p>如果显示 <code>Connection timed out</code> ，说明25端口不开放。需要注意的是：部分服务商或是系统，需要在控制后台开放25端口，或需要开放系统防火墙端口。</p>
+<p>本文引用自：<span class="exturl" data-url="aHR0cHM6Ly9jbmJveS5vcmcvMTM2Nw==">四海部落<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    Buy Me Coffee
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Aixiu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Aixiu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>aixiu
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.ynxiu.com/aixiu/cc0ad38f.html" title="VPS&#x2F;服务器常用脚本合集">http://blog.ynxiu.com/aixiu/cc0ad38f.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/VPS/" rel="tag"><i class="fa fa-tag"></i> VPS</a>
+              <a href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag"><i class="fa fa-tag"></i> 脚本</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/aixiu/9ec48eaf.html" rel="prev" title="Oracle_Cloud_DD_windows_other">
+                  <i class="fa fa-chevron-left"></i> Oracle_Cloud_DD_windows_other
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/aixiu/759b51dc.html" rel="next" title="Oracle控制台更改密码、邮箱、租户名等教程">
+                  Oracle控制台更改密码、邮箱、租户名等教程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">鄂ICP备15017263号 </span>
+  </div>
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YnXiu.com <span class="post-meta-item">|</span> <a target="_blank" rel="noopener" href="http://ynxiu.com">LZ-AD</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">46k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:34</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.ynxiu.com/aixiu/cc0ad38f.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.aixiu.ml","jsUrl":null,"el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<!-- 动感标签 -->
+<script type="text/javascript" src="/js/dongganTab.js"></script>
+</body>
+</html>

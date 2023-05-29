@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="//fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="eZIAiI9UOOFS9gGrEGJMCgLmHsUScGGsZTkdsKq5YqY">
+  <meta name="msvalidate.01" content="583F0DD3225A3B6BBCCFDA9F66C1E404">
+  <meta name="baidu-site-verification" content="z9DiSS0RNh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.ynxiu.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":{"twikoo":{"text":"\u003ci class=\"fab fa-gratipay fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> twikoo  | 默认","order":1},"giscus":{"text":"\u003ci class=\"fab fa-github-alt fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> giscus(需github帐号) | 备用","order":2}},"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUpribbon"}},"prism":false,"i18n":{"placeholder":"请输入关键字搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言之前了解了下travis-ci部署博客，虽然方便，但是毕竟设置麻烦，需借用第三方网站功能，前些天看到github也有自动化功能了，百度一番，结果倒是挺多，但是基本没有无错或是某些地方详细说明的，踩了无数的坑，尝试了无数次的操作，总结了此文，有些操作或设置会尽量做到无错，使有需要的人能完美使用。 前期准备整体规划思路： 本地生成hexo静态博客 配置Actions Workflow 脚本 写博文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github+Actions搭建静态博客">
+<meta property="og:url" content="http://blog.ynxiu.com/aixiu/2acccc9c.html">
+<meta property="og:site_name" content="量子广告">
+<meta property="og:description" content="前言之前了解了下travis-ci部署博客，虽然方便，但是毕竟设置麻烦，需借用第三方网站功能，前些天看到github也有自动化功能了，百度一番，结果倒是挺多，但是基本没有无错或是某些地方详细说明的，踩了无数的坑，尝试了无数次的操作，总结了此文，有些操作或设置会尽量做到无错，使有需要的人能完美使用。 前期准备整体规划思路： 本地生成hexo静态博客 配置Actions Workflow 脚本 写博文">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-02T11:23:25.000Z">
+<meta property="article:modified_time" content="2020-05-02T11:23:25.000Z">
+<meta property="article:author" content="Aixiu">
+<meta property="article:tag" content="Github">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="CI">
+<meta property="article:tag" content="插件">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.ynxiu.com/aixiu/2acccc9c.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.ynxiu.com/aixiu/2acccc9c.html","path":"aixiu/2acccc9c.html","title":"github+Actions搭建静态博客"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>github+Actions搭建静态博客 | 量子广告</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?e1515d81cb5b44b88bfce41938a6921a"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="量子广告" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">量子广告</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">协作发展&bull;畅想双赢</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>链接</a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-other"><a href="/other/" rel="section"><i class="fa fa-flask fa-fw"></i>其它</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="请输入关键字搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E8%A7%84%E5%88%92%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">整体规划思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">2.2.</span> <span class="nav-text">目标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Github-Pages"><span class="nav-number">2.2.1.</span> <span class="nav-text">Github Pages</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Coding-Pages"><span class="nav-number">2.2.2.</span> <span class="nav-text">Coding Pages</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%94%9F%E6%88%90hexo%E5%8D%9A%E5%AE%A2"><span class="nav-number">2.3.</span> <span class="nav-text">本地生成hexo博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%86%E9%92%A5"><span class="nav-number">2.4.</span> <span class="nav-text">设置密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-Actions"><span class="nav-number">2.5.</span> <span class="nav-text">添加 Actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">2.6.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-README"><span class="nav-number">2.7.</span> <span class="nav-text">添加 README</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D"><span class="nav-number">2.8.</span> <span class="nav-text">域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Ehexo%E7%9A%84-config-yml%E9%85%8D%E7%BD%AE%EF%BC%8C%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%B8%AD%EF%BC%9A"><span class="nav-number">2.9.</span> <span class="nav-text">关于hexo的_config.yml配置，官方文档中：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%B3%E8%BF%87%E5%8D%95%E6%96%87%E6%A1%A3"><span class="nav-number">2.9.1.</span> <span class="nav-text">跳过单文档</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Aixiu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Aixiu</p>
+  <div class="site-description" itemprop="description">专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpeGl1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aixiu"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0L3UvYWl4aXU=" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;aixiu"><i class="fab fa-gg fa-fw"></i>Coding</span>
+      </span>
+  </div>
+<div id="chakhsu" class="site-description" itemprop="description">
+  <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } 
+  /*以下内容自定义修改*/ 
+  var l = "量子广告-", o = ["协作发展", "畅想双赢", "承接各类户内外广告","passion & love"].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); 
+  </script> 
+<div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/abe6fe6d.html" rel="bookmark">
+        <time class="popular-posts-time">2016-04-26</time>
+        <br>
+      如何删除 Master 分支
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/95d3162c.html" rel="bookmark">
+        <time class="popular-posts-time">2016-04-27</time>
+        <br>
+      将hexo博客同时托管到github和coding
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/f9ec3873.html" rel="bookmark">
+        <time class="popular-posts-time">2023-01-15</time>
+        <br>
+      Github/Gitlab Actions中的cron格式和设置方法
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/f130801a.html" rel="bookmark">
+        <time class="popular-posts-time">2016-04-27</time>
+        <br>
+      多台电脑维护hexo博客
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/848a3bd4.html" rel="bookmark">
+        <time class="popular-posts-time">2016-05-19</time>
+        <br>
+      如何进行远程版本回退
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.ynxiu.com/aixiu/2acccc9c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Aixiu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="量子广告">
+      <meta itemprop="description" content="专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="github+Actions搭建静态博客 | 量子广告">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          github+Actions搭建静态博客
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-02 11:23:25" itemprop="dateCreated datePublished" datetime="2020-05-02T11:23:25+00:00">2020-05-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前了解了下travis-ci部署博客，虽然方便，但是毕竟设置麻烦，需借用第三方网站功能，前些天看到github也有自动化功能了，百度一番，结果倒是挺多，但是基本没有无错或是某些地方详细说明的，踩了无数的坑，尝试了无数次的操作，总结了此文，有些操作或设置会尽量做到无错，使有需要的人能完美使用。</p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><h3 id="整体规划思路："><a href="#整体规划思路：" class="headerlink" title="整体规划思路："></a>整体规划思路：</h3><ul>
+<li>本地生成hexo静态博客</li>
+<li>配置Actions Workflow 脚本</li>
+<li>写博文，push到博客源码仓库，Actions会自动部署博客</li>
+</ul>
+<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>因为我自己使用了Coding Pages和Github Pages两个，所以最终也会通过Workflow脚本部署到这两个仓库。这中间有一些东西要讲清楚。比如，博客部署到用户目录，还是项目目录，Coding Pages和Github Pages有什么区别，有什么改动，博客配置文件如何设置。</p>
+<span id="more"></span>
+
+<h4 id="Github-Pages"><a href="#Github-Pages" class="headerlink" title="Github Pages"></a>Github Pages</h4><p>所有希望部署<strong>Github pages</strong>的仓库必须是 <strong>公开</strong> 仓库，或是升级为<code>GitHub Pro</code>,官方原话为：<code>Upgrade to GitHub Pro or make this repository public to enable Wikis.</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">Pages 类型</th>
+<th align="center">Pages 默认分配的 URL</th>
+<th align="center">允许的部署来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Github用户 Pages</td>
+<td align="center">{username}.github.io</td>
+<td align="center">master 分支、github-pages 分支、或 master 分支中的 &#x2F;docs 目录</td>
+</tr>
+<tr>
+<td align="center">Github项目 Pages</td>
+<td align="center">{user_name}.github.io&#x2F;{project_name}</td>
+<td align="center">master 分支、或 master 分支中的 &#x2F;docs 目录</td>
+</tr>
+<tr>
+<td align="center">Github项目中的 &#x2F;docs</td>
+<td align="center">{user_name}.github.io&#x2F;{project_name}</td>
+<td align="center">master 分支、或 master 分支中的 &#x2F;docs 目录</td>
+</tr>
+</tbody></table>
+<h4 id="Coding-Pages"><a href="#Coding-Pages" class="headerlink" title="Coding Pages"></a>Coding Pages</h4><p>2020年以前还分用户和项目pages,在2020年以后，就统一了，URL样式都是统一的 <code>http://XXXX.coding-pages.com</code>,其中XXXX是随机的数字+字母组合。有兴趣的可以查看官方帮助文档。<span class="exturl" data-url="aHR0cHM6Ly9oZWxwLmNvZGluZy5uZXQvZG9jcy9kZXZvcHMvY2Qvc3RhdGljLXdlYnNpdGUuaHRtbCMlRTYlOTAlQUQlRTUlQkIlQkElRTklOUQlOTklRTYlODAlODElRTclQkQlOTElRTclQUIlOTk=">coding官方搭建指南<i class="fa fa-external-link-alt"></i></span></p>
+<p>本文以github用户Pages为前提。如果只是单独部署在github，随意是用户还是顶目都行，记得在hexo设置文件里设置：</p>
+<mark class="label danger">第一个坑</mark>
+<p><code>_config.yml</code>的<code>root: /notes-action-pages</code>字段分两种情况：</p>
+<ul>
+<li>用户目录pages 设置为 <code>root: / </code></li>
+<li>项目目录pages 设置为 <code>root: /&#123;project_name&#125;</code></li>
+</ul>
+<p>因为coding pages只有一种格式，和github 用户pages的格式相同，不再设置二级项目目录访问，如果在github 项目目录pages生成的静态文件，部署到coding pages时，会目录错误，比如CSS,访问页面找不到，如果有哪个读者知道有更好的解决办法，可以留言告诉我，谢谢。</p>
+<blockquote>
+<p>为了不影响后边设置，请提前准备以下工作。</p>
+</blockquote>
+<ul>
+<li>私有仓库名字随意，比如：<code>blog</code>, 主要存放博客源文源码及日后写作的md文档。</li>
+<li>公开仓库：<code>&#123;project_name&#125;.github.io</code>。一个github用户名下，只能有一个仓库能设置为<code>&#123;project_name&#125;.github.io</code>访问地址，也就是<code>gh-pages</code>分支部署的结果。主要存放，public 静态页面的,空的新项目，或是已有的都行。</li>
+</ul>
+<h3 id="本地生成hexo博客"><a href="#本地生成hexo博客" class="headerlink" title="本地生成hexo博客"></a>本地生成hexo博客</h3><p>具体使用方法，<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==">参考官方网站<i class="fa fa-external-link-alt"></i></span>,或自行搜索，本文略过。</p>
+<h3 id="设置密钥"><a href="#设置密钥" class="headerlink" title="设置密钥"></a>设置密钥</h3><p>为了方便运行 GitHub Actions 时登录 GitHub 账号，我们使用 SSH 方式登录，需设置无密码访问登录。</p>
+<mark class="label warning">第二个坑</mark>
+<p>之前查阅网上资料时，没有人说，用以前现有的公私钥对，还是重新生成新的，公钥是配置在<code>github 网站–&gt;Settings–&gt;SSH and GPG keys</code>还是<code>&#123;project_name&#125;项目–&gt;Settings–&gt;Deploy keys </code></p>
+<blockquote>
+<p>说明一下，这些设置的区别</p>
+</blockquote>
+<ul>
+<li><p>以 windows 为例：密钥对文件在 C:\Users\用户名里，其中 Users 可能因为系统原因显示的是用户。这个文件夹里会有一个.ssh 的目录，这个里面就是我们的密钥对。其中 id_rsa 是私钥，id_rsa.pub 是公钥。</p>
+</li>
+<li><p>配置公钥，也就是 <code>github 网站–&gt;Settings–&gt;SSH and GPG keys</code>的，如果以前就有可以直接用，不用生成新的，然后把 id_rsa.pub 这个文件用文本文档打开，将内容复制进去，如果没有就需要生成新的密钥对，配置方法一样。</p>
+</li>
+<li><p>配置私钥，把对应的私钥设置在 <code>放置源码</code>如：上文提到的<code>blog</code>仓库的<code>Settings–&gt;Secrets</code>,点击<code>Add a new secret</code>创建一个，<code>Name</code>可以随意，但是下文要用到我设置为：<code>HEXO_DEPLOY_PRIVATE_KEY</code>，<code>Value</code>就是与github以前用的公钥对应的私钥或新建对应的私钥内容。</p>
+</li>
+<li><p>如果没有则需要创建命令为：<code>ssh-keygen -t rsa -C &quot;Github 的邮箱地址&quot;</code> 。使用方法见第二条。</p>
+</li>
+<li><p>区别： <code>github 网站–&gt;Settings–&gt;SSH and GPG keys</code>，这个是对<code>&#123;username&#125;</code>用户名下所有的仓库都有读写权限。<code>&#123;project_name&#125;项目–&gt;Settings–&gt;Deploy keys</code>，这个只是对本顶目有读写权限，下文部署hexo中用到了在Workflow 脚本clone 另一个不公开的主题仓库，所以本文设置为<code>github 网站–&gt;Settings–&gt;SSH and GPG keys</code></p>
+</li>
+<li><p>如果还有不明白的自行找资料，本文不再赘述。</p>
+</li>
+</ul>
+<h3 id="添加-Actions"><a href="#添加-Actions" class="headerlink" title="添加 Actions"></a>添加 Actions</h3><mark class="label success">方法一：</mark>
+<p>点击私有仓库上方里的 <code>Actions</code>，点击<code>set up a workflow yourself </code>创建一个新的 actions。自动命名为<code>main.yml</code>，也可以自己命名。<br>然后在内容框填入以下代码：</p>
+<blockquote>
+<p>脚本中用到的字段，需自己在源码仓库 <code>Settings–&gt;Secrets</code> 添加。</p>
+</blockquote>
+<blockquote>
+<p><code>HEXO_DEPLOY_PRIVATE_KEY</code>配置与网站对应的密钥。</p>
+</blockquote>
+<blockquote>
+<p><code>GIT_NAME</code>配置名字， <code>GIT_EMAIL</code>配置邮箱。</p>
+</blockquote>
+<blockquote>
+<p><code>GH_TOKEN</code>配置。需要自己去 GitHub setting 里申请，方法自行百度。申请后，只显示一次，刷新或重新打开时，不再显示。记得复制保存下。配置时需填入。</p>
+</blockquote>
+<blockquote>
+<p><code>CD_TOKEN</code>配置。需要到仓库的项目设置，然后在开发者选项的项目令牌申请。CDT_TOKEN 的内容为 <code>用户名:密码</code> 。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Hexo</span> <span class="string">Blog</span> <span class="string">CI</span>  <span class="comment"># 自动化的名称</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span> <span class="comment"># 只在master  push 时运行</span></span><br><span class="line">  <span class="attr">push:</span> <span class="comment"># push的时候触发</span></span><br><span class="line">      <span class="attr">branches:</span> <span class="comment"># 那些分支需要触发</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span> <span class="comment"># 指定运行所需要的运行环境（最新版本） 可选 ubuntu-latest, ubuntu-18.04, ubuntu-16.04, windows-latest, windows-2019, windows-2016, macOS-latest, macOS-10.14</span></span><br><span class="line">    <span class="attr">strategy:</span></span><br><span class="line">      <span class="attr">matrix:</span></span><br><span class="line">        <span class="attr">node-version:</span> [<span class="number">12.</span><span class="string">x</span>]  <span class="comment"># 指定node的版本号</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">开始运行</span>  <span class="comment"># 使用 actions/checkout 这个插件 用于拉取当前仓库的master分支</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span> <span class="comment"># 脚本来自 https://github.com/actions/checkout</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">设置</span> <span class="string">Node.js</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node-version</span> <span class="string">&#125;&#125;</span>  <span class="comment"># 使用 actions/setup-node@v1 插件配置node环境</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v1</span> <span class="comment"># 配置脚本来自 https://github.com/actions/setup-node</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node-version</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">配置</span> <span class="string">Git</span> <span class="string">环境</span></span><br><span class="line">        <span class="comment"># 该步骤所需的环境变量。</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">HEXO_DEPLOY_PRIVATE_KEY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.HEXO_DEPLOY_PRIVATE_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          # set up private key for deploy</span></span><br><span class="line"><span class="string">          mkdir -p ~/.ssh/</span></span><br><span class="line"><span class="string">          echo &quot;$HEXO_DEPLOY_PRIVATE_KEY&quot; | tr -d &#x27;\r&#x27; &gt; ~/.ssh/id_rsa # 配置秘钥</span></span><br><span class="line"><span class="string">          chmod 600 ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">          # set git infomation</span></span><br><span class="line"><span class="string">          git config --global user.name &quot;$&#123;&#123;secrets.GIT_NAME&#125;&#125;&quot;</span></span><br><span class="line"><span class="string">          git config --global user.email &quot;$&#123;&#123;secrets.GIT_EMAIL&#125;&#125;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装</span> <span class="string">Hexo</span> <span class="string">CI</span>  <span class="comment"># 安装 hexo-cli 与项目所需的 node_modules</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          export TZ=&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"><span class="string">          npm install hexo-cli -g</span></span><br><span class="line"><span class="string">          npm install</span></span><br><span class="line"><span class="string">          npm audit fix</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装插件</span> <span class="comment"># npm ls --depth 0 可查看自己安装了哪些插件</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm install hexo-deployer-git --save</span></span><br><span class="line"><span class="string">          npm install hexo-generator-sitemap --save</span></span><br><span class="line"><span class="string">          npm install hexo-generator-baidu-sitemap --save</span></span><br><span class="line"><span class="string">          npm install hexo-generator-category --save</span></span><br><span class="line"><span class="string">          npm install hexo-generator-feed --save</span></span><br><span class="line"><span class="string">          npm install hexo-related-popular-posts --save</span></span><br><span class="line"><span class="string">          npm install pangu --save</span></span><br><span class="line"><span class="string">          npm install quicklink --save</span></span><br><span class="line"><span class="string">          npm install hexo-symbols-count-time --save</span></span><br><span class="line"><span class="string">          npm install hexo-generator-searchdb --save</span></span><br><span class="line"><span class="string">          git clone https://github.com/theme-next/theme-next-pace source/lib/pace</span></span><br><span class="line"><span class="string">          npm install theme-next/hexo-next-tag --save</span></span><br><span class="line"><span class="string">          npm install theme-next/hexo-next-title --save</span></span><br><span class="line"><span class="string">          npm install theme-next/hexo-next-utteranc --save</span></span><br><span class="line"><span class="string">          git clone git@github.com:$&#123;&#123;secrets.GIT_NAME&#125;&#125;/你的主题仓库.git themes/主题名字</span></span><br><span class="line"><span class="string">          npm audit fix</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">生成静态资源</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          hexo clean &amp;&amp; hexo g</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">部署博客</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">GH_REF:</span> <span class="string">github.com/$&#123;&#123;secrets.GIT_NAME&#125;&#125;/notes-action-pages.git</span>   <span class="comment"># GitHub 仓库 HTTPS地址  不要用SSH地址，否则出错</span></span><br><span class="line">          <span class="attr">GH_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GH_TOKEN</span> <span class="string">&#125;&#125;</span> <span class="comment"># 预先生成 GitHub Token</span></span><br><span class="line">          <span class="attr">CD_REF:</span> <span class="string">e.coding.net/$&#123;&#123;secrets.GIT_NAME&#125;&#125;/notes-action-pages.git</span>   <span class="comment"># coding 仓库 HTTPS 地址  不要用SSH地址，否则出错</span></span><br><span class="line">          <span class="attr">CD_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.CD_TOKEN</span> <span class="string">&#125;&#125;</span> <span class="comment"># 预先生成 coding Token</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          # 生成 commit message 默认抓取最后一次提交信息</span></span><br><span class="line"><span class="string">          git log --pretty=format:&quot;:lock: Actions CI: %s Site updated: %cd&quot; --date=format:&#x27;%Y-%m-%d %H:%M:%S&#x27;  &gt; commit-message.log</span></span><br><span class="line"><span class="string">          cd ./public</span></span><br><span class="line"><span class="string">          git init</span></span><br><span class="line"><span class="string">          git add .</span></span><br><span class="line"><span class="string">          git commit -F ../commit-message.log</span></span><br><span class="line"><span class="string">          git push -u --force --quiet &quot;https://$&#123;GH_TOKEN&#125;@$&#123;GH_REF&#125;&quot; master:master</span></span><br><span class="line"><span class="string">          git push -u --force --quiet &quot;https://$&#123;CD_TOKEN&#125;@$&#123;CD_REF&#125;&quot; master:master</span></span><br><span class="line"><span class="string">          rm ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          rm -rf .deploy_git</span></span><br></pre></td></tr></table></figure>
+
+<mark class="label success">方法二：</mark>
+<p>在本地生成hexo博客后，自建<code>.github -&gt; workflows -&gt; xxx.yml</code>复制上边样本代码。</p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>上边<code>Actions</code>脚本中，有几点说明：</p>
+<ul>
+<li><code>runs-on: ubuntu-latest</code>  部署环境，虽然可用选项挺多，但是建议用ubuntu,因为私有仓库每月只有2000分钟，超出时间收费，收费如下：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">系统</th>
+<th align="center">Linux（2 cores, 7GB）</th>
+<th align="center">Windows（2 cores, 7GB）</th>
+<th align="center">macOS（2 cores, 7GB）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">收费</td>
+<td align="center">$0.008&#x2F;每分钟</td>
+<td align="center">$0.016&#x2F;每分钟</td>
+<td align="center">$0.08&#x2F;每分钟</td>
+</tr>
+</tbody></table>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZlYXR1cmVzL2FjdGlvbnM=">官方说明文档<i class="fa fa-external-link-alt"></i></span></p>
+<ul>
+<li><p>主题主题可以用别人的主题，也可以用自己修改或是开发的主题，使用时，可以在<code>插件</code>部分，clone一下就好。</p>
+</li>
+<li><p><code>&#123;GH_REF&#125;</code> GitHub 仓库 HTTPS地址  不要用SSH地址，否则出错，我试用用SSH的写法，出错。</p>
+</li>
+<li><p><code>&#123;GH_REF&#125;</code> # coding 仓库 HTTPS 地址  不要用SSH地址，否则出错，同上。</p>
+</li>
+<li><p><code>git log --pretty=format:&quot;:lock: Actions CI: %s Site updated: %cd&quot; --date=format:&#39;%Y-%m-%d %H:%M:%S&#39;  &gt; commit-message.log</code>  就是自定义commit 的内容，个性化设置，及时间日期。</p>
+</li>
+</ul>
+<blockquote>
+<p>安装插件部分，如果是新建的博客，本地没有安装任何插件的，可以使用。如果本地已是完成了所有的插件安装，并已生成了包含所有依赖的 <code>package.json</code>和 <code>package-lock.json</code> 那么，只需要保留以下几个即可：</p>
+</blockquote>
+<blockquote>
+<p>每个项目的根目录下面，一般都有一个package.json文件，定义了这个项目所需要的各种模块，以及项目的配置信息（比如名称、版本、许可证等元数据）。npm install命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。</p>
+</blockquote>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装插件</span> <span class="comment"># npm ls --depth 0 可查看自己安装了哪些插件</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          git clone https://github.com/theme-next/theme-next-pace source/lib/pace</span></span><br><span class="line"><span class="string">          git clone git@github.com:$&#123;&#123;secrets.GIT_NAME&#125;&#125;/你的主题仓库.git themes/主题名字</span></span><br><span class="line"><span class="string">          npm audit fix</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加-README"><a href="#添加-README" class="headerlink" title="添加 README"></a>添加 README</h3><p>在博客设置页面<code>_config.yml</code>，配置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">skip_render:</span> <span class="comment">#跳过渲染文件或文件夹如： - test.html   - test/*</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">README.md</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>解决方式很简单，在博客根目录的配置文件中找到 skip_render 字段，添加值<code>CNAME</code>,如果是多个值的配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">skip_render: #跳过渲染文件或文件夹如： - test.html   - test/*</span><br><span class="line"> - &#x27;README.md&#x27;</span><br><span class="line"> - &#x27;CNAME&#x27;</span><br></pre></td></tr></table></figure>
+<p>然后在 <code>/source</code> 的目录中创建一个文件，命名为 <code>CNAME</code>，里边的内容写你的域名。只写域名即可。例如 <code>www.baidu.com</code>，不需要添加 <code>http(s)://</code></p>
+<hr>
+<blockquote>
+<p>详细使用方法：</p>
+</blockquote>
+<h3 id="关于hexo的-config-yml配置，官方文档中："><a href="#关于hexo的-config-yml配置，官方文档中：" class="headerlink" title="关于hexo的_config.yml配置，官方文档中："></a>关于hexo的_config.yml配置，官方文档中：</h3><ul>
+<li><p>skip_render：跳过指定文档的渲染，您可使用 glob 表达式来匹配路径。</p>
+</li>
+<li><p>未说明具体该怎么配置</p>
+</li>
+<li><p>修改的_config.yml配置文档应为站点文档夹下的，而非主题文档夹下的_config.yml配置文档</p>
+</li>
+<li><p>可以直接 Ctrl + F 查找 skip_render 关键字</p>
+</li>
+</ul>
+<h4 id="跳过单文档"><a href="#跳过单文档" class="headerlink" title="跳过单文档"></a>跳过单文档</h4><p>如果要跳过source文档夹下的test.html，可以这样配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: test.html</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: [test.html]</span><br></pre></td></tr></table></figure>
+
+<p>跳过多文档</p>
+<p>如果要忽略source下的test文档夹下所有文档，可以这样配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: test/*</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: [test/*]</span><br></pre></td></tr></table></figure>
+
+<p>如果要忽略source下的test文档夹下.html文档，可以这样配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: test/*.html</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: [test/*.html]</span><br></pre></td></tr></table></figure>
+
+<p>如果要忽略source下的test文档夹下所有文档和目录，可以这样配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: test/**</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: [test/**]</span><br></pre></td></tr></table></figure>
+
+<p>如果要忽略多个路径的文档或目录，可以这样配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">skip_render:</span><br><span class="line">    - test.html</span><br><span class="line">    - &#x27;*.html&#x27;</span><br><span class="line">    - test/**</span><br><span class="line">    - test/*</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: [test.html, &#x27;*.html&#x27;, test/**, test/*]</span><br></pre></td></tr></table></figure>
+
+<p>参见：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvL2lzc3Vlcy8xMTQ2">如何不处理source目录下某个子目录的所有文档，仅仅是将其copy到public目录中对应目录？<i class="fa fa-external-link-alt"></i></span><br>参见：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW50bW9lLmNvbS9wb3N0cy82MDgxMTU3Zi9pbmRleC5odG1s">小康博客<i class="fa fa-external-link-alt"></i></span><br>参见：<span class="exturl" data-url="aHR0cHM6Ly9lYWxsaW9uLmNvbS9naXRodWItYWN0aW9ucy1oZXhvLWNpLw==">eallion<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    Buy Me Coffee
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Aixiu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Aixiu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Aixiu
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.ynxiu.com/aixiu/2acccc9c.html" title="github+Actions搭建静态博客">http://blog.ynxiu.com/aixiu/2acccc9c.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Github/" rel="tag"><i class="fa fa-tag"></i> Github</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/CI/" rel="tag"><i class="fa fa-tag"></i> CI</a>
+              <a href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> 插件</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/aixiu/4ec920c2.html" rel="prev" title="Linux指定目录安装软件及案例">
+                  <i class="fa fa-chevron-left"></i> Linux指定目录安装软件及案例
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/aixiu/b8b2d453.html" rel="next" title="git clone常用命令">
+                  git clone常用命令 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">鄂ICP备15017263号 </span>
+  </div>
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YnXiu.com <span class="post-meta-item">|</span> <a target="_blank" rel="noopener" href="http://ynxiu.com">LZ-AD</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">46k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:34</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.ynxiu.com/aixiu/2acccc9c.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.aixiu.ml","jsUrl":null,"el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<!-- 动感标签 -->
+<script type="text/javascript" src="/js/dongganTab.js"></script>
+</body>
+</html>

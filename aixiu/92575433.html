@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="//fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="eZIAiI9UOOFS9gGrEGJMCgLmHsUScGGsZTkdsKq5YqY">
+  <meta name="msvalidate.01" content="583F0DD3225A3B6BBCCFDA9F66C1E404">
+  <meta name="baidu-site-verification" content="z9DiSS0RNh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.ynxiu.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":{"twikoo":{"text":"\u003ci class=\"fab fa-gratipay fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> twikoo  | 默认","order":1},"giscus":{"text":"\u003ci class=\"fab fa-github-alt fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> giscus(需github帐号) | 备用","order":2}},"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUpribbon"}},"prism":false,"i18n":{"placeholder":"请输入关键字搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一、DD本机系统dd系统即重装系统：如下表示将系统重置为 ubuntu20.04系统，账号&#x2F;密码：root&#x2F;12345 注意事项：dd过程一定要耐心等待，不要胡乱操作比如去后台重启，容易失联。耐心等待10-30分钟。 1bash &lt;(wget --no-check-certificate -qO- &amp;#x27;https:&#x2F;&#x2F;moeclub.org&#x2F;attachment&#x2F;Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="甲骨文DD&amp;失联救砖教程">
+<meta property="og:url" content="http://blog.ynxiu.com/aixiu/92575433.html">
+<meta property="og:site_name" content="量子广告">
+<meta property="og:description" content="一、DD本机系统dd系统即重装系统：如下表示将系统重置为 ubuntu20.04系统，账号&#x2F;密码：root&#x2F;12345 注意事项：dd过程一定要耐心等待，不要胡乱操作比如去后台重启，容易失联。耐心等待10-30分钟。 1bash &lt;(wget --no-check-certificate -qO- &amp;#x27;https:&#x2F;&#x2F;moeclub.org&#x2F;attachment&#x2F;Linux">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228140405947.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228140732940.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228141538320.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228141808049.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228161954526.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228162114183.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228162147909.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228162331087.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228144806483.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228152927672.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228163539931.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228163656347.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228163803917.png">
+<meta property="article:published_time" content="2023-01-14T15:54:13.000Z">
+<meta property="article:modified_time" content="2023-01-14T15:54:13.000Z">
+<meta property="article:author" content="Aixiu">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="VPS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.ynxiu.com/aixiu/92575433/image-20221228140405947.png">
+
+
+<link rel="canonical" href="http://blog.ynxiu.com/aixiu/92575433.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.ynxiu.com/aixiu/92575433.html","path":"aixiu/92575433.html","title":"甲骨文DD&失联救砖教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>甲骨文DD&失联救砖教程 | 量子广告</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?e1515d81cb5b44b88bfce41938a6921a"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="量子广告" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">量子广告</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">协作发展&bull;畅想双赢</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>链接</a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-other"><a href="/other/" rel="section"><i class="fa fa-flask fa-fw"></i>其它</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="请输入关键字搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81DD%E6%9C%AC%E6%9C%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">一、DD本机系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%A4%B1%E8%81%94%E6%95%91%E7%A0%96"><span class="nav-number">2.</span> <span class="nav-text">二、失联救砖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E5%A4%87%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.1.</span> <span class="nav-text">1、创建备用实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%88%86%E7%A6%BB%E5%A4%B1%E8%81%94%E5%AE%9E%E4%BE%8B%E7%A1%AC%E7%9B%98"><span class="nav-number">2.2.</span> <span class="nav-text">2、分离失联实例硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E6%8C%82%E8%BD%BD%E5%A4%B1%E8%81%94%E5%AE%9E%E4%BE%8B%E5%BC%95%E5%AF%BC%E5%8D%B7-gt-%E5%A4%87%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.3.</span> <span class="nav-text">3、挂载失联实例引导卷-&gt;备用实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81dd%E9%99%84%E5%8A%A0%E7%9B%98"><span class="nav-number">2.4.</span> <span class="nav-text">4、dd附加盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81dd%E7%BB%93%E6%9D%9F%EF%BC%8C%E5%88%86%E7%A6%BB%E5%A4%87%E7%94%A8%E5%AE%9E%E4%BE%8B%E9%99%84%E5%8A%A0%E7%9B%98-gt-%E6%8C%82%E8%BD%BD%E4%B8%BA%E5%A4%B1%E8%81%94%E5%AE%9E%E4%BE%8B%E5%BC%95%E5%AF%BC%E7%9B%98"><span class="nav-number">2.5.</span> <span class="nav-text">5、dd结束，分离备用实例附加盘-&gt;挂载为失联实例引导盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%87%AA%E5%B7%B1%E5%88%B6%E4%BD%9Cdd%E5%8C%85%EF%BC%88%E9%99%84%E5%8A%A0%E5%86%85%E5%AE%B9%EF%BC%8C%E6%9C%89%E9%9C%80%E6%B1%82%E5%8F%AF%E4%BB%A5%E7%8E%A9%E7%8E%A9%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、自己制作dd包（附加内容，有需求可以玩玩）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Aixiu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Aixiu</p>
+  <div class="site-description" itemprop="description">专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpeGl1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aixiu"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0L3UvYWl4aXU=" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;aixiu"><i class="fab fa-gg fa-fw"></i>Coding</span>
+      </span>
+  </div>
+<div id="chakhsu" class="site-description" itemprop="description">
+  <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } 
+  /*以下内容自定义修改*/ 
+  var l = "量子广告-", o = ["协作发展", "畅想双赢", "承接各类户内外广告","passion & love"].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); 
+  </script> 
+<div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/54526bc3.html" rel="bookmark">
+        <time class="popular-posts-time">2023-03-23</time>
+        <br>
+      Oracle Cloud利用VNC拯救失联服务器(Linux和Windows)
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/bbefb6a2.html" rel="bookmark">
+        <time class="popular-posts-time">2023-01-15</time>
+        <br>
+      Hexo图片不显示问题
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/759b51dc.html" rel="bookmark">
+        <time class="popular-posts-time">2023-03-23</time>
+        <br>
+      Oracle控制台更改密码、邮箱、租户名等教程
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/6bd3a88c.html" rel="bookmark">
+        <time class="popular-posts-time">2023-04-03</time>
+        <br>
+      网站徽章shields制作教程
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/fdc6071f.html" rel="bookmark">
+        <time class="popular-posts-time">2023-03-23</time>
+        <br>
+      Oracle 甲骨文AMD/ARM实例救援教程
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.ynxiu.com/aixiu/92575433.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Aixiu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="量子广告">
+      <meta itemprop="description" content="专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="甲骨文DD&失联救砖教程 | 量子广告">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          甲骨文DD&失联救砖教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-14 15:54:13" itemprop="dateCreated datePublished" datetime="2023-01-14T15:54:13+00:00">2023-01-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">技术探讨</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>787</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="一、DD本机系统"><a href="#一、DD本机系统" class="headerlink" title="一、DD本机系统"></a>一、DD本机系统</h2><p>dd系统即重装系统：如下表示将系统重置为<code> ubuntu20.04</code>系统，账号&#x2F;密码：<code>root/12345</code></p>
+<p><strong>注意事项：dd过程一定要耐心等待，不要胡乱操作比如去后台重启，容易失联。耐心等待10-30分钟。</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(wget --no-check-certificate -qO- &#x27;https://moeclub.org/attachment/LinuxShell/InstallNET.sh&#x27;) -u 20.04 -v 64 -a -firmware -p 12345</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ul>
+<li>-d: Debian系统 版本可选：【7、8、9、10，11】</li>
+<li>-u: Ubuntu系统 版本可选：【14.04、16.04、18.04、20.04】</li>
+<li>-p: 密码</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="二、失联救砖"><a href="#二、失联救砖" class="headerlink" title="二、失联救砖"></a>二、失联救砖</h2><ul>
+<li>这边假设你没有看到上面的注意事项，dd失联了，当然也有可能是其他原因引起。就是无法通过ssh链接你的服务器了。就需要救砖了。</li>
+<li>救砖原理为：服务器数据存储在甲骨文的磁盘里，也就是那个默认50G的盘里。这个盘可以分离，挂载，重置数据。可以理解为你的U盘，可以拔出来，换台电脑重置一下系统，再插回去。</li>
+</ul>
+<h3 id="1、创建备用实例"><a href="#1、创建备用实例" class="headerlink" title="1、创建备用实例"></a>1、创建备用实例</h3><ol>
+<li><p>同账号找一个新的实例；如果没有则创建一个amd免费的</p>
+<p><img src="/aixiu/92575433/image-20221228140405947.png" alt="image-20221228140405947"></p>
+</li>
+<li><p>ssh连接，然后执行<code>sudo -i</code> 进入root；</p>
+<p><img src="/aixiu/92575433/image-20221228140732940.png" alt="image-20221228140732940"></p>
+</li>
+</ol>
+<h3 id="2、分离失联实例硬盘"><a href="#2、分离失联实例硬盘" class="headerlink" title="2、分离失联实例硬盘"></a>2、分离失联实例硬盘</h3><ol>
+<li><p>停止失联实例:注意是停止不是终止，一会还得挂载回来</p>
+</li>
+<li><p>分离引导卷</p>
+<p><img src="/aixiu/92575433/image-20221228141538320.png" alt="image-20221228141538320"></p>
+</li>
+</ol>
+<h3 id="3、挂载失联实例引导卷-gt-备用实例"><a href="#3、挂载失联实例引导卷-gt-备用实例" class="headerlink" title="3、挂载失联实例引导卷-&gt;备用实例"></a>3、挂载失联实例引导卷-&gt;备用实例</h3><ol>
+<li><p>备用实例 -&gt; 附加的块存储</p>
+<p><img src="/aixiu/92575433/image-20221228141808049.png" alt="image-20221228141808049"></p>
+</li>
+<li><p>选择刚刚分离的失联引导卷，类型<code>ISCSI</code>，访问<code>读写</code></p>
+<p><img src="/aixiu/92575433/image-20221228161954526.png" alt="image-20221228161954526"></p>
+</li>
+<li><p>ISCSI需要在主机上执行挂载分离命令，此处先复制链接命令，过会分离用分离命令</p>
+<p><img src="/aixiu/92575433/image-20221228162114183.png" alt="image-20221228162114183"></p>
+<p><img src="/aixiu/92575433/image-20221228162147909.png" alt="image-20221228162147909"></p>
+</li>
+<li><p>打开备用实例ssh，输入复制的连接命令</p>
+<p><img src="/aixiu/92575433/image-20221228162331087.png" alt="image-20221228162331087"></p>
+</li>
+</ol>
+<h3 id="4、dd附加盘"><a href="#4、dd附加盘" class="headerlink" title="4、dd附加盘"></a>4、dd附加盘</h3><p><strong>注：此系统为原作者简化dabian系统，主要为了快速恢复失联；等待失联恢复后如需要其他系统，可使用一、中脚本重新dd</strong></p>
+<ol>
+<li><p>下载镜像<code>cd /root &amp;&amp; wget https://app.isos.cc/dabian.sdb.gz</code></p>
+</li>
+<li><p>dd系统<code>gzip -dc /root/dabian.sdb.gz | dd of=/dev/sdb</code></p>
+<p><img src="/aixiu/92575433/image-20221228144806483.png" alt="image-20221228144806483"></p>
+</li>
+<li><p>新打开一个ssh窗口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">watch -n 5 pkill -USR1 ^dd$</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后重新回到此窗口，将发现dd正在进行中，一直等待到进度完成，此dd需要复制3.2G数据。</p>
+<p><img src="/aixiu/92575433/image-20221228152927672.png" alt="image-20221228152927672"></p>
+</li>
+</ol>
+<h3 id="5、dd结束，分离备用实例附加盘-gt-挂载为失联实例引导盘"><a href="#5、dd结束，分离备用实例附加盘-gt-挂载为失联实例引导盘" class="headerlink" title="5、dd结束，分离备用实例附加盘-&gt;挂载为失联实例引导盘"></a>5、dd结束，分离备用实例附加盘-&gt;挂载为失联实例引导盘</h3><ol>
+<li><p>分离附加盘，3-3步骤的分离命令执行一下，控制台分离</p>
+<p><img src="/aixiu/92575433/image-20221228163539931.png" alt="image-20221228163539931"></p>
+</li>
+</ol>
+<p><img src="/aixiu/92575433/image-20221228163656347.png" alt="image-20221228163656347"></p>
+<ol>
+<li><p>回到失联实例-引导卷，再给附加回去</p>
+<p><img src="/aixiu/92575433/image-20221228163803917.png" alt="image-20221228163803917"></p>
+</li>
+<li><p>开机，使用 账号&#x2F;密码：<code>root/10086.fit</code>登录实例。</p>
+</li>
+</ol>
+<h2 id="三、自己制作dd包（附加内容，有需求可以玩玩）"><a href="#三、自己制作dd包（附加内容，有需求可以玩玩）" class="headerlink" title="三、自己制作dd包（附加内容，有需求可以玩玩）"></a>三、自己制作dd包（附加内容，有需求可以玩玩）</h2><ol>
+<li>与 二 步骤相同，把想要作为镜像的arm引导盘挂载到一个备用机（建议配置高点，速度快）</li>
+<li>备用机执行<code>dd if=/dev/sdb | gzip &gt; /root/ubuntu.img.gz</code>生成的压缩包在&#x2F;root目录下，时间很长需要等待</li>
+<li>dd恢复命令<code>gzip -dc /root/ubuntu.img.gz | dd of=/dev/sdb</code>，过程如 二</li>
+</ol>
+<hr>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmh1aWppYTIxLmNvbS8yMDIyMTIyODE2Mjc0Mi5odG1s">原文链接：小回博客<i class="fa fa-external-link-alt"></i></span></p>
+<p>参考文章：<span class="exturl" data-url="aHR0cHM6Ly8xMDA4Ni5maXQvMTIyMg==">https://10086.fit/1222<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    Buy Me Coffee
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Aixiu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Aixiu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>aixiu
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.ynxiu.com/aixiu/92575433.html" title="甲骨文DD&amp;失联救砖教程">http://blog.ynxiu.com/aixiu/92575433.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Oracle/" rel="tag"><i class="fa fa-tag"></i> Oracle</a>
+              <a href="/tags/VPS/" rel="tag"><i class="fa fa-tag"></i> VPS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/aixiu/2a55c9f8.html" rel="prev" title="给博客挂个春节灯笼">
+                  <i class="fa fa-chevron-left"></i> 给博客挂个春节灯笼
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/aixiu/bbefb6a2.html" rel="next" title="Hexo图片不显示问题">
+                  Hexo图片不显示问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">鄂ICP备15017263号 </span>
+  </div>
+
+<div class="copyright">
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YnXiu.com <span class="post-meta-item">|</span> <a target="_blank" rel="noopener" href="http://ynxiu.com">LZ-AD</a></span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">46k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:34</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.ynxiu.com/aixiu/92575433.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.aixiu.ml","jsUrl":null,"el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<!-- 动感标签 -->
+<script type="text/javascript" src="/js/dongganTab.js"></script>
+</body>
+</html>
