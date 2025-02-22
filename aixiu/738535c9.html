@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+<link rel="preconnect" href="//fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="eZIAiI9UOOFS9gGrEGJMCgLmHsUScGGsZTkdsKq5YqY">
+  <meta name="msvalidate.01" content="583F0DD3225A3B6BBCCFDA9F66C1E404">
+  <meta name="baidu-site-verification" content="z9DiSS0RNh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css2?family=Monda:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Slab:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=PT+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.ynxiu.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":{"twikoo":{"text":"\u003ci class=\"fab fa-gratipay fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> twikoo  | 默认","order":1},"giscus":{"text":"\u003ci class=\"fab fa-github-alt fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> giscus(需github帐号) | 备用","order":2}},"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUpribbon"}},"prism":false,"i18n":{"placeholder":"请输入关键字搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":true,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="准备工作   搭建方案：caddy + falsk + gunicorn  使用到的工具：git，docker  准备一个解析到服务器IP的域名。   工具不齐或是不会使用的自行搜索找方法。本文只记录操作。 docker安装1curl -fsSL https:&#x2F;&#x2F;get.docker.com | sh &amp;&amp; ln -s &#x2F;usr&#x2F;libexec&#x2F;docker&#x2F;cli-plugin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署aliyundrive-qr-login记录">
+<meta property="og:url" content="http://blog.ynxiu.com/aixiu/738535c9.html">
+<meta property="og:site_name" content="量子广告">
+<meta property="og:description" content="准备工作   搭建方案：caddy + falsk + gunicorn  使用到的工具：git，docker  准备一个解析到服务器IP的域名。   工具不齐或是不会使用的自行搜索找方法。本文只记录操作。 docker安装1curl -fsSL https:&#x2F;&#x2F;get.docker.com | sh &amp;&amp; ln -s &#x2F;usr&#x2F;libexec&#x2F;docker&#x2F;cli-plugin">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-05T18:24:37.000Z">
+<meta property="article:modified_time" content="2024-04-05T18:24:37.000Z">
+<meta property="article:author" content="Aixiu">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="flask">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.ynxiu.com/aixiu/738535c9.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.ynxiu.com/aixiu/738535c9.html","path":"aixiu/738535c9.html","title":"部署aliyundrive-qr-login记录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>部署aliyundrive-qr-login记录 | 量子广告</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?e1515d81cb5b44b88bfce41938a6921a"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="量子广告" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">量子广告</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">协作发展&bull;畅想双赢</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>链接</a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-other"><a href="/other/" rel="section"><i class="fa fa-flask fa-fw"></i>其它</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="请输入关键字搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">docker安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-%E5%AE%89%E8%A3%85%EF%BC%8C%E5%A6%82%E6%9E%9C%E5%B7%B2%E6%9C%89%E5%88%99%E8%B7%B3%E8%BF%87"><span class="nav-number">2.</span> <span class="nav-text">git 安装，如果已有则跳过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E6%A0%BC%EF%BC%8C%E5%A6%82-aixiu-network"><span class="nav-number">2.1.</span> <span class="nav-text">新建自定义网格，如 aixiu-network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2caddy"><span class="nav-number">2.2.</span> <span class="nav-text">部署caddy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2aliyun-flask"><span class="nav-number">2.3.</span> <span class="nav-text">部署aliyun-flask</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%8E%B0%E5%9C%A8%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">2.4.</span> <span class="nav-text">查看现在的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AECaddyfile"><span class="nav-number">2.5.</span> <span class="nav-text">配置Caddyfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%90%AFcaddy"><span class="nav-number">2.6.</span> <span class="nav-text">重启caddy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E7%9B%B8%E5%85%B3Docker%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">其它相关Docker命令</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Aixiu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Aixiu</p>
+  <div class="site-description" itemprop="description">专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpeGl1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aixiu"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0L3UvYWl4aXU=" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;aixiu"><i class="fab fa-gg fa-fw"></i>Coding</span>
+      </span>
+  </div>
+<div id="chakhsu" class="site-description" itemprop="description">
+  <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } 
+  /*以下内容自定义修改*/ 
+  var l = "量子广告-", o = ["协作发展", "畅想双赢", "承接各类户内外广告","passion & love"].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); 
+  </script> 
+<div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/b8b2d453.html" rel="bookmark">
+        <time class="popular-posts-time">2020-05-21</time>
+        <br>
+      git clone常用命令
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.ynxiu.com/aixiu/738535c9.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Aixiu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="量子广告">
+      <meta itemprop="description" content="专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="部署aliyundrive-qr-login记录 | 量子广告">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          部署aliyundrive-qr-login记录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-04-05 18:24:37" itemprop="dateCreated datePublished" datetime="2024-04-05T18:24:37+00:00">2024-04-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>准备工作</p>
+</blockquote>
+<ul>
+<li><p>搭建方案：caddy + falsk + gunicorn</p>
+</li>
+<li><p>使用到的工具：git，docker</p>
+</li>
+<li><p>准备一个解析到服务器IP的域名。</p>
+</li>
+</ul>
+<p>工具不齐或是不会使用的自行搜索找方法。本文只记录操作。</p>
+<h2 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | sh &amp;&amp; <span class="built_in">ln</span> -s /usr/libexec/docker/cli-plugins/docker-compose /usr/local/bin</span><br></pre></td></tr></table></figure>
+
+<p>官方一键脚本并配置好docker-compose</p>
+<p>查看：<code>docker -v</code></p>
+<p>返回：<code>Docker version 26.0.0, build 2ae903e</code></p>
+<p>即安装成功，其它docker相关命令，本文最后提供。</p>
+<p><em><span id="more"></span></em></p>
+<h2 id="git-安装，如果已有则跳过"><a href="#git-安装，如果已有则跳过" class="headerlink" title="git 安装，如果已有则跳过"></a>git 安装，如果已有则跳过</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-<span class="built_in">get</span> install git</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>部署</p>
+</blockquote>
+<p><del>一些想法：想过很多方案，比如nginx + uwsgi +flask， 这种方案也挺好只是后边配置域名时会麻烦点，caddy和flask在同一个容器里方便，但是其它容器想利用caddy就很不爽，所以最终决定使用caddy和flask两个独立容器部署的方案。</del></p>
+<h3 id="新建自定义网格，如-aixiu-network"><a href="#新建自定义网格，如-aixiu-network" class="headerlink" title="新建自定义网格，如 aixiu-network"></a><em>新建自定义网格，如 aixiu-network</em></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create aixiu-network</span><br></pre></td></tr></table></figure>
+
+<p>注：<code>aixiu-network</code>名字可以自定义，后边要用到。主要是因为它使得容器间的通信变得更容易，也支持DNS解析，容器可以使用容器名进行互相访问。</p>
+<p><em># 如果Flask容器已经运行，你需要将其连接到新的网络，比如将Flask容器添加到网络：</em></p>
+<p>docker network connect aixiu-network aliyun-flask </p>
+<h3 id="部署caddy"><a href="#部署caddy" class="headerlink" title="部署caddy"></a>部署caddy</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name caddy --network aixiu-network -p 80:80 -p 443:443 -p 443:443/udp -v /www/caddy/:/etc/caddy/ -v /www/wwwroot/:/usr/share/caddy/ --restart=always caddy:latest</span><br></pre></td></tr></table></figure>
+
+<p>命令解释：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">这条命令是在Docker中启动一个Caddy服务器的示例，下面是每个选项的详细解释：</span><br><span class="line"></span><br><span class="line">docker run：Docker的命令，用于创建并启动一个新的容器。</span><br><span class="line"></span><br><span class="line">-d：以“detached”模式运行，即容器在后台运行。</span><br><span class="line"></span><br><span class="line">--name caddy：为正在创建的容器分配一个名称，这里的名称为“caddy”。</span><br><span class="line"></span><br><span class="line">--network aixiu-network：将容器连接到指定的网络。这里，容器将连接到名为“aixiu-network”的网络。若该网络不存在，您需要先创建它。</span><br><span class="line"></span><br><span class="line">-p <span class="number">80</span>:<span class="number">80</span>：端口映射，将容器内的<span class="number">80</span>端口映射到宿主机的<span class="number">80</span>端口。用于HTTP通信。</span><br><span class="line"></span><br><span class="line">-p <span class="number">443</span>:<span class="number">443</span>：端口映射，将容器内的<span class="number">443</span>端口映射到宿主机的<span class="number">443</span>端口。用于HTTPS通信。</span><br><span class="line"></span><br><span class="line">-p <span class="number">443</span>:<span class="number">443</span>/udp：端口映射，将容器内的<span class="number">443</span>端口映射到宿主机的<span class="number">443</span>端口，针对UDP协议。这通常用于某些特定的网络功能，如QUIC。</span><br><span class="line"></span><br><span class="line">-v <span class="regexp">/www/</span>caddy<span class="regexp">/:/</span>etc<span class="regexp">/caddy/</span>：卷映射，将宿主机的<span class="regexp">/www/</span>caddy<span class="regexp">/目录挂载到容器的/</span>etc<span class="regexp">/caddy/</span>目录。这允许您将宿主机上的Caddy配置文件（如Caddyfile）映射至容器内。</span><br><span class="line"></span><br><span class="line">-v <span class="regexp">/www/</span>wwwroot<span class="regexp">/:/u</span>sr<span class="regexp">/share/</span>caddy<span class="regexp">/：卷映射，将宿主机的/</span>www<span class="regexp">/wwwroot/</span>目录挂载到容器的<span class="regexp">/usr/</span>share<span class="regexp">/caddy/</span>目录。这可以用于存放您的网站文件，Caddy服务器将从这个目录服务静态文件。</span><br><span class="line"></span><br><span class="line">--restart=always：告诉Docker在容器退出时总是重启容器。</span><br><span class="line"></span><br><span class="line">caddy:latest：指定要使用的镜像，这里使用的是Caddy的最新版镜像。</span><br><span class="line"></span><br><span class="line">总结来说，这条命令将启动一个Caddy服务器容器，该容器使用指定的网络和端口映射，同时挂载了配置文件和网站文件目录以便Caddy可以访问。此外，容器被配置为在退出时自动重启。</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署aliyun-flask"><a href="#部署aliyun-flask" class="headerlink" title="部署aliyun-flask"></a>部署aliyun-flask</h3><ol>
+<li><p>用<code>xshell</code>连接到服务器，先创建两个文件夹</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p <span class="regexp">/www/</span>&#123;caddy,wwwroot&#125;</span><br></pre></td></tr></table></figure>
+
+<p>caddy文件夹用来存放Caddyfile，wwwroot用来存放网站源码。</p>
+</li>
+<li><p>进入wwwroot目录</p>
+<p><code>cd /www/wwwroot</code></p>
+<p>使用<code>git clone https://github.com/ImYrS/aliyundrive-qr-login.git</code>下载源码，</p>
+<p>并使用命令进入aliyundrive-qr-login目录：<code>cd aliyundrive-qr-login</code></p>
+</li>
+<li><p>配置文件复制一份并改名为config.ini：<code>mv example.config.ini config.ini</code></p>
+</li>
+<li><p>创建<code>Dockerfile</code></p>
+<p><code>nano Dockerfile</code></p>
+<p>自用配置，可按需更改：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用官方 Python Docker 镜像</span></span><br><span class="line">FROM python:3.9-slim-buster</span><br><span class="line"></span><br><span class="line"><span class="comment"># LABEL 维护者信息</span></span><br><span class="line">LABEL 888888@qq.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作目录</span></span><br><span class="line">WORKDIR /www/wwwroot/aliyundrive-qr-login</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装系统依赖</span></span><br><span class="line"><span class="comment"># RUN apt-get update &amp;&amp; apt-get install -y gcc libffi-dev</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝项目文件到容器内</span></span><br><span class="line">COPY . /www/wwwroot/aliyundrive-qr-login</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装项目依赖</span></span><br><span class="line">RUN pip install --no-cache-dir -r requirements.txt gunicorn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置环境变量</span></span><br><span class="line">ENV <span class="attr">GUNICORN_CMD</span>=<span class="string">&quot;gunicorn -w 2 -b 0.0.0.0:5500 app:app&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暴露需要的端口</span></span><br><span class="line">EXPOSE 5500</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 Gunicorn 服务器</span></span><br><span class="line">CMD <span class="section">[ &quot;sh&quot;, &quot;-c&quot;, &quot;$GUNICORN_CMD&quot; ]</span></span><br></pre></td></tr></table></figure>
+
+<p>以下是每一行代码的解释：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">FROM python:3.9-slim-buster</span><br><span class="line">使用官方 Python 3.9 轻量级镜像作为基础镜像。</span><br><span class="line"></span><br><span class="line">LABEL 4815563@qq.com</span><br><span class="line">使用LABEL指令添加维护者信息。这个指令用于添加镜像的元数据。</span><br><span class="line"></span><br><span class="line">WORKDIR /www/wwwroot/aliyundrive-qr-login</span><br><span class="line">设置工作目录为 /www/wwwroot/aliyundrive-qr-login，以便接下来的命令在这个目录中执行。</span><br><span class="line"></span><br><span class="line">COPY . /www/wwwroot/aliyundrive-qr-login</span><br><span class="line">将当前目录中的所有文件和子目录复制到Docker镜像内的/www/wwwroot/aliyundrive-qr-login目录中。</span><br><span class="line"></span><br><span class="line">RUN pip install --no-cache-dir -r requirements.txt gunicorn</span><br><span class="line">在镜像中运行命令，安装指定的Python依赖包（通过requirements.txt文件指定），同时安装了gunicorn作为WSGI HTTP服务器。</span><br><span class="line"></span><br><span class="line">ENV <span class="attr">GUNICORN_CMD</span>=<span class="string">&quot;gunicorn -w 2 -b 0.0.0.0:5500 app:app&quot;</span></span><br><span class="line">设置环境变量GUNICORN_CMD为gunicorn -w 2 -b 0.0.0.0:5500 app:app，这在容器启动时执行。</span><br><span class="line"></span><br><span class="line">EXPOSE 5500</span><br><span class="line">声明容器运行时将要监听的端口号，这里是5500。</span><br><span class="line"></span><br><span class="line">CMD <span class="section">[ &quot;sh&quot;, &quot;-c&quot;, &quot;$GUNICORN_CMD&quot; ]</span></span><br><span class="line">在容器启动时执行sh -c &quot;$GUNICORN_CMD&quot;命令。这会启动一个新的shell并在其中执行$GUNICORN_CMD中设置的命令，这里是启动gunicorn服务器。</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">注释掉的命令：RUN apt-<span class="built_in">get</span> <span class="keyword">update</span> &amp;&amp; apt-<span class="built_in">get</span> install -y gcc libffi-<span class="built_in">dev</span>。这行命令用于更新apt软件包列表并安装gcc和libffi-<span class="built_in">dev</span>这两个软件包。</span><br><span class="line"></span><br><span class="line">是否需要运行这个命令取决于你的项目的具体需求。如果你的Python依赖或应用程序需要这些软件包来编译或安装特定的依赖，那么运行这个命令是必要的。</span><br><span class="line"></span><br><span class="line">例如，如果你的Python依赖包中包含需要编译的C扩展，那么你可能需要安装gcc。如果你的应用需要使用libffi库，那么你可能需要安装libffi-<span class="built_in">dev</span>。</span><br><span class="line"></span><br><span class="line">建议检查你的应用程序是否有这些依赖，并根据需要决定是否运行这个命令。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构建flask Docker镜像镜像<br><code>docker build -t aliyun-flask:latest . -f Dockerfile</code></p>
+<p>命令解释：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">这是一个用于构建Docker镜像的命令，其含义如下：</span><br><span class="line"></span><br><span class="line">docker build：这部分命令告诉Docker命令行工具我们要构建一个新的镜像。</span><br><span class="line"></span><br><span class="line"><span class="deletion">-t aliyun-flask:latest：这个部分用于给镜像指定一个标签（tag），其中aliyun-flask是镜像的名称，latest是标签，表示这是最新的版本。这样做的好处是可以更方便地识别镜像的版本。</span></span><br><span class="line"></span><br><span class="line">.：这表示Dockerfile所在的目录，也就是当前目录。Docker将查找该目录下的Dockerfile来进行构建。</span><br><span class="line"></span><br><span class="line"><span class="deletion">-f Dockerfile：这是用来指定Dockerfile的文件名。默认情况下，Docker会在当前目录查找名为Dockerfile的文件来进行构建，但是如果你的Dockerfile文件命名不是Dockerfile，你可以使用-f选项来指定文件名。</span></span><br><span class="line"></span><br><span class="line">所以，这条命令的含义是告诉Docker命令行工具使用当前目录中的Dockerfile来构建一个带有aliyun-flask:latest标签的镜像。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署flask docker </p>
+<p><code>docker run -d --name aliyun-flask --network aixiu-network -p 5500:5500 --restart=always aliyun-flask:latest</code></p>
+<p>其含义如下：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">docker run：这部分命令告诉Docker命令行工具我们要运行一个新的容器。</span><br><span class="line"></span><br><span class="line"><span class="deletion">-d：这个选项表示在“后台”模式下运行容器，也就是分离模式。</span></span><br><span class="line"></span><br><span class="line"><span class="deletion">--name aliyun-flask：这表示给容器指定一个名称，这里是aliyun-flask。</span></span><br><span class="line"></span><br><span class="line"><span class="deletion">--network aixiu-network：这部分指定了容器所连接的网络，这里是aixiu-network。</span></span><br><span class="line"></span><br><span class="line"><span class="deletion">-p 5500:5500：这个部分用于映射容器的端口到宿主机的端口，这里是将容器的5500端口映射到宿主机的5500端口。</span></span><br><span class="line"></span><br><span class="line"><span class="deletion">--restart=always：这个选项表示容器将始终自动重启，即使Docker守护进程被重启。</span></span><br><span class="line"></span><br><span class="line">aliyun-flask:latest：这是要运行的镜像的名称和标签。在这种情况下，它运行了名为aliyun-flask的镜像的最新版本。</span><br><span class="line"></span><br><span class="line">综合起来，这条命令的含义是在后台模式下运行一个名为aliyun-flask的Docker容器，连接到aixiu-network网络，并将容器的5500端口映射到宿主机的5500端口。容器将受到Docker守护进程的监管，并在必要时自动重启。</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="查看现在的状态"><a href="#查看现在的状态" class="headerlink" title="查看现在的状态"></a>查看现在的状态</h3><p><code>docker images</code></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">REPOSITORY</span>     TAG       IMAGE ID       CREATED       SIZE</span><br><span class="line"><span class="attribute">aliyun</span>-flask   latest    <span class="number">87</span>a8f1250fa5   <span class="number">3</span> hours ago   <span class="number">144</span>MB</span><br><span class="line"><span class="attribute">caddy</span>          latest    <span class="number">439</span>af64db489   <span class="number">2</span> years ago   <span class="number">40</span>.<span class="number">1</span>MB</span><br></pre></td></tr></table></figure>
+
+<p>有两个镜像。</p>
+<p><code>docker ps -a</code>查看所有容器</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">CONTAINER</span> ID   IMAGE                 COMMAND                   CREATED        NAMES</span><br><span class="line"><span class="attribute">597f48baf6aa</span>   aliyun-flask:latest   <span class="string">&quot;sh -c $GUNICORN_CMD&quot;</span>     <span class="number">2</span> hours ago   aliyun-flask</span><br><span class="line"><span class="attribute">426a73fae06d</span>   caddy:latest          <span class="string">&quot;caddy run --config …&quot;</span>   <span class="number">2</span> hours ago    caddy</span><br></pre></td></tr></table></figure>
+
+<p><code>docker ps</code>查看启动运行中的容器</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">CONTAINER</span> ID   IMAGE                 COMMAND                   CREATED        NAMES</span><br><span class="line"><span class="attribute">597f48baf6aa</span>   aliyun-flask:latest   <span class="string">&quot;sh -c $GUNICORN_CMD&quot;</span>     <span class="number">2</span> hours ago   aliyun-flask</span><br><span class="line"><span class="attribute">426a73fae06d</span>   caddy:latest          <span class="string">&quot;caddy run --config …&quot;</span>   <span class="number">2</span> hours ago    caddy</span><br></pre></td></tr></table></figure>
+
+<p>如果发现运行中的容器不是两个，请自行解决。</p>
+<h3 id="配置Caddyfile"><a href="#配置Caddyfile" class="headerlink" title="配置Caddyfile"></a>配置Caddyfile</h3><p>cd &#x2F;www&#x2F;caddy</p>
+<p>nano Caddyfile</p>
+<p>写入</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jihu.pp.ua &#123;</span><br><span class="line">    reverse_proxy aliyun-flask:<span class="number">5500</span>  <span class="meta"># aliyun-flask即docker run -d --name aliyun-flask名字一至</span></span><br><span class="line">    encode gzip</span><br><span class="line">    tls <span class="number">88888</span><span class="symbol">@qq</span>.com  <span class="meta"># 请填写自己的可用邮箱来申请tsl证书</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="重启caddy"><a href="#重启caddy" class="headerlink" title="重启caddy"></a>重启caddy</h3><p>docker restart caddy</p>
+<p>即可用域名访问</p>
+<h2 id="其它相关Docker命令"><a href="#其它相关Docker命令" class="headerlink" title="其它相关Docker命令"></a>其它相关Docker命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> docker <span class="comment"># 设置开机启动</span></span><br><span class="line"></span><br><span class="line">systemctl start docker  <span class="comment"># 启动docker</span></span><br><span class="line">systemctl restart docker <span class="comment"># 重启docker</span></span><br><span class="line"></span><br><span class="line">systemctl stop docker <span class="comment"># 停止docker</span></span><br><span class="line"></span><br><span class="line">docker images <span class="comment"># 查看镜像</span></span><br><span class="line"></span><br><span class="line">docker stop  container <span class="comment"># 停止container容器</span></span><br><span class="line">docker <span class="built_in">rm</span> container1 container2 container3  <span class="comment"># 删除多个容器</span></span><br><span class="line">docker rmi &lt;镜像ID1&gt; &lt;镜像ID2&gt; &lt;镜像ID3&gt;  <span class="comment"># 删除多个镜像</span></span><br><span class="line">docker image prune -a <span class="comment"># 删除所有悬空镜像（即没有标签且没有被容器引用的镜像）</span></span><br><span class="line">docker rmi $(docker images -q) -f  <span class="comment"># 删除所有镜像</span></span><br><span class="line"></span><br><span class="line">其它</span><br><span class="line">查看docker信息</span><br><span class="line">docker version</span><br><span class="line"></span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束 <i class="fa fa-paw"></i> 感谢阅读------</div>
+    
+</div>
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    Buy Me Coffee
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Aixiu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Aixiu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>aixiu
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.ynxiu.com/aixiu/738535c9.html" title="部署aliyundrive-qr-login记录">http://blog.ynxiu.com/aixiu/738535c9.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+              <a href="/tags/flask/" rel="tag"><i class="fa fa-tag"></i> flask</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/aixiu/6bc2cfae.html" rel="prev" title="反编译pyinstaller生成exe的工具">
+                  <i class="fa fa-angle-left"></i> 反编译pyinstaller生成exe的工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/aixiu/72e96a30.html" rel="next" title="Serv00搭建各种服务">
+                  Serv00搭建各种服务 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">鄂ICP备15017263号 </span>
+  </div>
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heartbeat"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YnXiu.com <span class="post-meta-item">|</span> <a target="_blank" rel="noopener" href="http://ynxiu.com">LZ-AD</a></span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">64k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:33</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.ynxiu.com/aixiu/738535c9.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.aixiu.eu.org","jsUrl":null,"el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<!-- 动感标签 -->
+<script type="text/javascript" src="/js/dongganTab.js"></script>
+</body>
+</html>

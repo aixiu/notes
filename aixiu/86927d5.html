@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+<link rel="preconnect" href="//fonts.loli.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="eZIAiI9UOOFS9gGrEGJMCgLmHsUScGGsZTkdsKq5YqY">
+  <meta name="msvalidate.01" content="583F0DD3225A3B6BBCCFDA9F66C1E404">
+  <meta name="baidu-site-verification" content="z9DiSS0RNh">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css2?family=Monda:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Slab:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=PT+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.ynxiu.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":240},"hljswrap":true,"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","storage":true,"lazyload":false,"nav":{"twikoo":{"text":"\u003ci class=\"fab fa-gratipay fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> twikoo  | 默认","order":1},"giscus":{"text":"\u003ci class=\"fab fa-github-alt fa-fw fa-lg\" aria-hidden=\"true\">\u003c/i> giscus(需github帐号) | 备用","order":2}},"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":true,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUpribbon"}},"prism":false,"i18n":{"placeholder":"请输入关键字搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":true,"preload":true,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今天给大家再介绍一个41合1脚本，这个脚本也是基于萌咖脚本优化、开发的。但是DD过程基本上不需要自己编写，完全傻瓜式,可能更适合“小白”网友。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全自动一键网络重装脚本（DD脚本）">
+<meta property="og:url" content="http://blog.ynxiu.com/aixiu/86927d5.html">
+<meta property="og:site_name" content="量子广告">
+<meta property="og:description" content="今天给大家再介绍一个41合1脚本，这个脚本也是基于萌咖脚本优化、开发的。但是DD过程基本上不需要自己编写，完全傻瓜式,可能更适合“小白”网友。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/86927d5/c4ca4238a0b9238-17.png">
+<meta property="og:image" content="http://blog.ynxiu.com/aixiu/86927d5/c81e728d9d4c2f6-17.png">
+<meta property="article:published_time" content="2023-03-23T10:11:53.000Z">
+<meta property="article:modified_time" content="2023-03-23T10:11:53.000Z">
+<meta property="article:author" content="Aixiu">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="DD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.ynxiu.com/aixiu/86927d5/c4ca4238a0b9238-17.png">
+
+
+<link rel="canonical" href="http://blog.ynxiu.com/aixiu/86927d5.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.ynxiu.com/aixiu/86927d5.html","path":"aixiu/86927d5.html","title":"全自动一键网络重装脚本（DD脚本）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>全自动一键网络重装脚本（DD脚本） | 量子广告</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?e1515d81cb5b44b88bfce41938a6921a"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="量子广告" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">量子广告</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">协作发展&bull;畅想双赢</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>链接</a></li><li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-other"><a href="/other/" rel="section"><i class="fa fa-flask fa-fw"></i>其它</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="请输入关键字搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">更新说明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%89%8D%E6%8F%90%E7%BB%84%E4%BB%B6%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">安装重装系统的前提组件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DD-%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">DD 命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#41%E5%90%881%E7%B3%BB%E7%BB%9F%E5%AF%86%E7%A0%81%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">41合1系统密码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">注意事项：</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Aixiu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Aixiu</p>
+  <div class="site-description" itemprop="description">专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpeGl1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aixiu"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0L3UvYWl4aXU=" title="Coding → https:&#x2F;&#x2F;coding.net&#x2F;u&#x2F;aixiu"><i class="fab fa-gg fa-fw"></i>Coding</span>
+      </span>
+  </div>
+<div id="chakhsu" class="site-description" itemprop="description">
+  <script> var chakhsu = function (r) { function t() { return b[Math.floor(Math.random() * b.length)] } function e() { return String.fromCharCode(94 * Math.random() + 33) } function n(r) { for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { var l = document.createElement("span"); l.textContent = e(), l.style.color = t(), n.appendChild(l) } return n } function i() { var t = o[c.skillI]; c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) } 
+  /*以下内容自定义修改*/ 
+  var l = "量子广告-", o = ["协作发展", "畅想双赢", "承接各类户内外广告","passion & love"].map(function (r) { return r + "" }), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; i() }; chakhsu(document.getElementById('chakhsu')); 
+  </script> 
+<div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/e65ee942.html" rel="bookmark">
+        <time class="popular-posts-time">2019-03-16</time>
+        <br>
+      Win10专业版永久密钥（支持重装）
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/dc86c258.html" rel="bookmark">
+        <time class="popular-posts-time">2023-03-23</time>
+        <br>
+      甲骨文 DD 安装成Windows系统 保姆级教程 百分百成功！
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/fdc6071f.html" rel="bookmark">
+        <time class="popular-posts-time">2023-03-23</time>
+        <br>
+      Oracle 甲骨文AMD/ARM实例救援教程
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/9ec48eaf.html" rel="bookmark">
+        <time class="popular-posts-time">2023-03-23</time>
+        <br>
+      Oracle_Cloud_DD_windows_other
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/aixiu/92575433.html" rel="bookmark">
+        <time class="popular-posts-time">2023-01-14</time>
+        <br>
+      甲骨文DD&失联救砖教程
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.ynxiu.com/aixiu/86927d5.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Aixiu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="量子广告">
+      <meta itemprop="description" content="专业设计制作：户外广告 | 喷绘 | 写真 | 条幅 | 画册 | 彩页 | 名片">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="全自动一键网络重装脚本（DD脚本） | 量子广告">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          全自动一键网络重装脚本（DD脚本）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-23 10:11:53" itemprop="dateCreated datePublished" datetime="2023-03-23T10:11:53+00:00">2023-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">技术探讨</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今天给大家再介绍一个41合1脚本，这个脚本也是基于萌咖脚本优化、开发的。但是DD过程基本上不需要自己编写，完全傻瓜式,可能更适合“小白”网友。</p>
+ <span id="more"></span>
+
+<h3 id="更新说明："><a href="#更新说明：" class="headerlink" title="更新说明："></a>更新说明：</h3><p>20220724：更新及增加大量系统镜像，41合1脚本，请注意看说明。<br>20220703：新增自定义SSH端口（9-16）</p>
+<p>20220613：新版自定义密码支持特殊字符.!$@#&amp;%</p>
+<p>20220428：修复MoeClub新版DD过程中卡住的BUG，修复Centos7下出现 Error! Not Found grub. 的错误提示，新增支持 xz 压缩格式的 DD 系统镜像包。</p>
+<p>20220406：CN系统镜像已失效，国内主机使用一键脚本1-25选项需要较长时间，推荐使用99的自定义系统镜像。</p>
+<p>20211120：更新MoeClub新版,依赖更少,支持原版自定义密码安装,体验版可能有Bug.</p>
+<p>20210909：支持debian11.</p>
+<p>20210511：发现很多人不知道怎么DD甲骨文,使用支持uefi的镜像包即可.脚本已添加3个甲骨文专用选项23-25.</p>
+<p>20210509：更新部分windows镜像,修正一处小问题.</p>
+<p>20210127：更换部分windows镜像.</p>
+<p>20210109：更新支持Ubuntu20.04安装,更新几个windows镜像.</p>
+<p>20200708：更新自动为CN主机使用国内镜像源.</p>
+<h3 id="安装重装系统的前提组件："><a href="#安装重装系统的前提组件：" class="headerlink" title="安装重装系统的前提组件："></a>安装重装系统的前提组件：</h3><p>Debian&#x2F;Ubuntu:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -y xz-utils openssl gawk file wget screen &amp;&amp; screen -S os</span><br></pre></td></tr></table></figure>
+
+<p>RedHat&#x2F;CentOS:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y xz openssl gawk file glibc-common wget screen &amp;&amp; screen -S os</span><br></pre></td></tr></table></figure>
+
+<p>如果出现异常，请刷新Mirrors缓存或更换镜像源。</p>
+<p>RedHat&#x2F;CentOS:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache &amp;&amp; yum update -y</span><br></pre></td></tr></table></figure>
+
+<p>Debian&#x2F;Ubuntu:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update -y &amp;&amp; apt dist-upgrade -y</span><br></pre></td></tr></table></figure>
+
+<h3 id="DD-命令："><a href="#DD-命令：" class="headerlink" title="DD 命令："></a>DD 命令：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O NewReinstall.sh https://git.io/newbetags &amp;&amp; chmod a+x NewReinstall.sh &amp;&amp; bash NewReinstall.sh</span><br></pre></td></tr></table></figure>
+
+<p>如为CN主机(部分主机商已不能使用)，可能出现报错或不能下载脚本的问题，可执行以下命令开始安装.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O NewReinstall.sh https://cdn.jsdelivr.net/gh/fcurrk/reinstall@master/NewReinstall.sh &amp;&amp; chmod a+x NewR</span><br></pre></td></tr></table></figure>
+
+<p><img src="/aixiu/86927d5/c4ca4238a0b9238-17.png" alt="img"><br>输入Y确认DD后主机自动获取IP，N则自行设置IP 输入N后会自动检测出主机现用IP，如果正确可以按Y确认使用，如不正确则按N自行按正确的输入。</p>
+<p><img src="/aixiu/86927d5/c81e728d9d4c2f6-17.png" alt="img"></p>
+<p>输入99则使用自定义镜像。 以上系统密码不为默认密码的均为网络收集，如有疑虑使用自己的自定义镜像。</p>
+<h3 id="41合1系统密码："><a href="#41合1系统密码：" class="headerlink" title="41合1系统密码："></a>41合1系统密码：</h3><p>1、CentOS 7.7 (已关闭防火墙及SELinux，默认密码Pwd@CentOS)<br>2、CentOS 7 (默认密码cxthhhhh.com)<br>3、CentOS 7 (支持ARM64、UEFI，默认密码cxthhhhh.com)<br>4、CentOS 8 (默认密码cxthhhhh.com)<br>5、Rocky 8 (默认密码cxthhhhh.com)<br>6、Rocky 8 (支持UEFI，默认密码cxthhhhh.com)<br>7、Rocky 8 (支持ARM64、UEFI，默认密码cxthhhhh.com)<br>8、CentOS 9 (默认密码cxthhhhh.com)<br>9、CentOS 6 (官方源原版，默认密码Minijer.com)<br>10、Debian 11 (官方源原版，默认密码Minijer.com)<br>11、Debian 10 (官方源原版，默认密码Minijer.com)<br>12、Debian 9 (官方源原版，默认密码Minijer.com)<br>13、Debian 8 (官方源原版，默认密码Minijer.com)<br>14、Ubuntu 20.04 (官方源原版，默认密码Minijer.com)<br>15、Ubuntu 18.04 (官方源原版，默认密码Minijer.com)<br>16、Ubuntu 16.04 (官方源原版，默认密码Minijer.com)<br>17、Windows Server 2022 (默认密码cxthhhhh.com)<br>18、Windows Server 2022 (支持UEFI，默认密码cxthhhhh.com)<br>19、Windows Server 2019 (默认密码cxthhhhh.com)<br>20、Windows Server 2016 (默认密码cxthhhhh.com)<br>21、Windows Server 2012 (默认密码cxthhhhh.com)<br>22、Windows Server 2008 (默认密码cxthhhhh.com)<br>23、Windows Server 2003 (默认密码cxthhhhh.com)<br>24、Windows 10 LTSC (默认密码Teddysun.com)<br>25、Windows 10 LTSC (支持UEFI，默认密码Teddysun.com)<br>26、Windows 7 x86 Lite (默认密码nat.ee)<br>27、Windows 7 x86 Lite (阿里云专用，默认密码nat.ee)<br>28、Windows 7 x64 Lite (默认密码nat.ee)<br>29、Windows 7 x64 Lite (支持UEFI，默认密码nat.ee)<br>30、Windows 10 LTSC Lite (默认密码nat.ee)<br>31、Windows 10 LTSC Lite (阿里云专用，默认密码nat.ee)<br>32、Windows 10 LTSC Lite (支持UEFI，默认密码nat.ee)<br>33、Windows Server 2003 Lite (C盘默认10G，默认密码WinSrv2003x86-Chinese)<br>34、Windows Server 2008 Lite (默认密码nat.ee)<br>35、Windows Server 2008 Lite (支持UEFI，默认密码nat.ee)<br>36、Windows Server 2012 Lite (默认密码nat.ee)<br>37、Windows Server 2012 Lite (支持UEFI，默认密码nat.ee)<br>38、Windows Server 2016 Lite (默认密码nat.ee)<br>39、Windows Server 2016 Lite (支持UEFI，默认密码nat.ee)<br>40、Windows Server 2022 Lite (默认密码nat.ee)<br>41、Windows Server 2022 Lite (支持UEFI，默认密码nat.ee)<br>99、自定义镜像</p>
+<hr>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><p>1、系统名称后带Lite的均为精简版，没有的是完整版</p>
+<p>2、[X64-Legacy-cxthhhhh]代表系统为AMD64位，支持传统BIOS启动，cxthhhhh定制的系统镜像</p>
+<p>3、ARM64代表系统支持ARM64位</p>
+<p>4、UEFI代表系统支持最新的UEFI启动，如甲骨文全部都是这种</p>
+<p>5、aliyun代表阿里云专用系统镜像</p>
+<p>6、cxthhhhh、teddysun、nat.ee均为三位制作系统镜像的大佬代称</p>
+<p>7、系统密码会在选择相应序号后提示，请注意记录</p>
+<p>8、经测试在谷歌云原版系统基础上DD会出现自动获取的子网掩码为255.255.255.255,如出现这种情况需要手工输入改正为正确的如255.255.255.0,否则会安装完成主机可能会离线</p>
+<p>9、阿里云因使用了特殊的驱动，DD安装Windows系统选择阿里云专用版</p>
+<p>10、Oracle Cloud（甲骨文云）可选择支持UEFI的镜像，注意基础系统最好选择Ubuntu，如原系统是CentOS可能无法成功，注意如是ARM机器注意选择同时支持ARM64和UEFI的镜像</p>
+<p>11、9-16项安装原版系统，可自定义密码，密码要求8-16位，以英文字母或数字开头，可以是大小写英文字母、数字及7个特殊字符.!$@#&amp;%的任意组合</p>
+<p>本文引用自：<span class="exturl" data-url="aHR0cHM6Ly9jbmJveS5vcmcvMTMzMQ==">四海部落<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束 <i class="fa fa-paw"></i> 感谢阅读------</div>
+    
+</div>
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    Buy Me Coffee
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Aixiu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Aixiu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>原作者： </strong>aixiu
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.ynxiu.com/aixiu/86927d5.html" title="全自动一键网络重装脚本（DD脚本）">http://blog.ynxiu.com/aixiu/86927d5.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Oracle/" rel="tag"><i class="fa fa-tag"></i> Oracle</a>
+              <a href="/tags/DD/" rel="tag"><i class="fa fa-tag"></i> DD</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/aixiu/759b51dc.html" rel="prev" title="Oracle控制台更改密码、邮箱、租户名等教程">
+                  <i class="fa fa-angle-left"></i> Oracle控制台更改密码、邮箱、租户名等教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/aixiu/22c58336.html" rel="next" title="红米AX6S-解锁SSH刷openwrt教程">
+                  红米AX6S-解锁SSH刷openwrt教程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">鄂ICP备15017263号 </span>
+  </div>
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heartbeat"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YnXiu.com <span class="post-meta-item">|</span> <a target="_blank" rel="noopener" href="http://ynxiu.com">LZ-AD</a></span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">64k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:33</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.ynxiu.com/aixiu/86927d5.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://twikoo.aixiu.eu.org","jsUrl":null,"el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+<!-- 动感标签 -->
+<script type="text/javascript" src="/js/dongganTab.js"></script>
+</body>
+</html>
